@@ -111,7 +111,7 @@ To communicate over the internet, your IP address must be translated to a public
 # APPROFONDIMENTO IFCONFIG
 
 
-`ifconfig` è uno strumento di configurazione di rete ampiamente utilizzato in sistemi basati su Unix e Linux. Di seguito ti fornisco alcuni esempi di comandi `ifconfig`:
+comandi `ifconfig`:
 
 1. **Visualizzare tutte le interfacce di rete disponibili:**
    ```bash
