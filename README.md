@@ -402,6 +402,9 @@ Le porte vanno da 0 a 65535. Di queste, le porte da 0 a 1023 sono considerate â€
  ```bash
 
 
+
+
+
 # NOTA
 A protocol simply defines a way of communication with all its rules. These rules are usually defined by an RFC (Request for Comments).
 There are many, many protocols in use on the internet. These include TCP, IP, UDP, FTP, HTTP, SMTP, etc., and each has its own set of rules that must be complied with to communicate effectively (similar to the rules we use in communication via written languages).
