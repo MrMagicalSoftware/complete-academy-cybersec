@@ -105,7 +105,7 @@ This is your private IP that is only usable on the local area network.
 To communicate over the internet, your IP address must be translated to a public IP by a NAT device
 
 
-
+> COMANDI iFCONFIG
 
 
 
