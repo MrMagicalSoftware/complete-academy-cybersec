@@ -164,6 +164,72 @@ comandi `ifconfig`:
     ```
 
 
+# COMANDO WINDOWS :
+
+> ipconfig
+
+
+Il comando `ipconfig` è utilizzato su sistemi operativi Windows per visualizzare e gestire le configurazioni di rete.
+
+1. **Visualizzare tutte le informazioni sulla configurazione di rete:**
+   ```bash
+   ipconfig
+   ```
+
+2. **Visualizzare informazioni dettagliate su tutte le interfacce di rete:**
+   ```bash
+   ipconfig /all
+   ```
+
+3. **Rinnovare l'assegnazione dell'indirizzo IP da un server DHCP:**
+   ```bash
+   ipconfig /renew
+   ```
+
+4. **Rilasciare l'indirizzo IP assegnato da un server DHCP:**
+   ```bash
+   ipconfig /release
+   ```
+
+5. **Visualizzare solo l'indirizzo IP per tutte le interfacce di rete:**
+   ```bash
+   ipconfig | findstr "IPv4"
+   ```
+
+6. **Visualizzare le informazioni sulla configurazione DNS:**
+   ```bash
+   ipconfig /all | findstr "DNS"
+   ```
+
+7. **Visualizzare solo l'indirizzo IP di un'interfaccia specifica (ad esempio, Ethernet):**
+   ```bash
+   ipconfig | findstr "Ethernet" -A 3
+   ```
+
+8. **Visualizzare l'indirizzo IP e il gateway predefinito di un'interfaccia specifica (ad esempio, Wi-Fi):**
+   ```bash
+   ipconfig | findstr "Wi-Fi" -A 5
+   ```
+
+9. **Visualizzare solo l'indirizzo MAC di tutte le interfacce di rete:**
+   ```bash
+   ipconfig /all | findstr "Physical Address"
+   ```
+
+10. **Visualizzare solo le informazioni sulla subnet mask di tutte le interfacce di rete:**
+    ```bash
+    ipconfig | findstr "Subnet Mask"
+    ```
+
+
+
+
+
+
+
+
+
+
 
 
 
