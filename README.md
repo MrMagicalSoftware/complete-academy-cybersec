@@ -62,6 +62,7 @@ Ricordando che 1 bytes -> 8 bit
 
 
 
+<img width="405" alt="Screenshot 2024-02-08 alle 11 00 21" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/5b2257b0-efe6-4170-b15a-2a0e81a64f32">
 
 
 
