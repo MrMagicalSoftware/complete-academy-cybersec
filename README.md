@@ -416,8 +416,92 @@ PROTOCOLLO PRINCIPE TCP/IP
 # PROTOCOLLO IP ( INTERNET PROTOCOL ) 
 
 
+Iniziamo a vedere una panoramica generale su questo protocollo :
 
 
+Il protocollo IP (Internet Protocol) è un protocollo fondamentale nella suite di protocolli TCP/IP ed è l’elemento principale che regola l’instradamento dei dati attraverso reti interconnesse, ovvero Internet. Agisce a livello di rete nel modello OSI, che è il terzo strato del modello di rete. Le due versioni principali sono IPv4 (Protocollo Internet versione 4) e IPv6 (versione 6).
+
+Il compito principale di IP è la consegna di pacchetti dal mittente al destinatario basandosi sui loro indirizzi IP. Un indirizzo IP è un’etichetta numerica univoca assegnata a ogni dispositivo collegato a una rete informatica che utilizza il protocollo IP per comunicare.
+
+IPv4 utilizza indirizzi a 32 bit, che sono comunemente rappresentati in notazione decimale puntata (ad esempio, 192.0.2.1). Tuttavia, poiché il numero di dispositivi connessi a Internet ha superato il numero di indirizzi IPv4 disponibili, è stato sviluppato IPv6.
+
+IPv6 usa indirizzi a 128 bit, offrendo una fornitura praticamente illimitata di indirizzi univoci e è rappresentato in notazione esadecimale, come in questo esempio: 2001:0db8:85a3:0000:0000:8a2e:0370:7334.
+
+Entrambe le versioni del protocollo IP forniscono funzioni che possono essere suddivise in vari aspetti chiave:
+
+1. Indirizzamento e routing: IP assegna indirizzi logici ai dispositivi e gestisce il routing dei pacchetti di dati tra sorgente e destinazione attraverso reti interconnesse.
+
+2. Frammentazione e riassemblaggio: IP è responsabile della frammentazione e del riassemblaggio dei pacchetti. Se un pacchetto è troppo grande per essere trasmesso su una rete, IP lo divide in frammenti di dimensioni gestibili. Questi frammenti vengono poi riassemblati una volta che raggiungono la destinazione.
+
+3. Inoltro di pacchetti: I router utilizzano le intestazioni IP per prendere decisioni sull’inoltro (forwarding) di pacchetti attraverso la rete.
+
+4. Controllo degli errori: IP utilizza un checksum nell’intestazione del pacchetto per verificare l’integrità dei dati dell’intestazione stessa. Se un pacchetto è danneggiato, viene scartato. (Si noti che il controllo degli errori per il contenuto del pacchetto è gestito da protocolli di livello superiore come TCP o UDP).
+
+5. Incapacità di garantire la consegna affidabile: IP non garantisce la consegna affidabile di pacchetti, non mantiene l’ordine di inoltro e non tiene traccia della consegna. Protocolli come TCP sono costruiti sopra IP per fornire questi servizi.
+
+
+<b>In sintesi </b>
+IP, o Internet Protocol, è il protocollo utilizzato per definire l'indirizzo IP di origine e di destinazione di un pacchetto che attraversa Internet. Viene spesso utilizzato insieme ad altri protocolli, come il TCP; da qui la congiunzione spesso usata, TCP/IP.
+
+
+<b> Anatomia di IP </b>
+
+
+<img width="865" alt="Screenshot 2024-02-08 alle 14 52 22" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/bf490c78-8985-4143-9241-81fe15bbf17c">
+
+
+Spiegazione in dettaglio
+
+
+Row 1
+Version: This defines the version of IP, either v4 or v6.
+IHL: Defines the header length.
+Type of Service (TOS): This defines the type of service of this packet. These include
+minimize delay, maximize throughput, maximize reliability, and minimize monetary cost.
+Total Length: This defines the total length of the IP datagram (including the data) or the
+fragment. Its maximum value is 65,535.
+
+
+<b>Spiegazione</b>
+
+IHL “Internet Header Length” (Lunghezza Intestazione Internet) ed è un campo presente nell’intestazione di un pacchetto IP. Si trova all’inizio dell’intestazione di un pacchetto IPv4 e specifica la lunghezza dell’intestazione del pacchetto IP in unità di parole a 32 bit.
+
+A causa della possibilità di includere opzioni varie nell’intestazione IP, la lunghezza dell’intestazione non è fissa e può variare. L’IHL indica quanta parte del pacchetto totale è occupata dall’intestazione, consentendo al ricevitore di determinare dove inizia effettivamente il contenuto dati (o payload) del pacchetto.
+
+Per esempio, la lunghezza minima dell’intestazione di un pacchetto IPv4 è di 20 byte (che corrispondono a 5 parole a 32 bit). Qualora non ci siano opzioni IP aggiuntive, il valore dell’IHL sarebbe quindi 5. Se ci fossero opzioni aggiuntive, l’intestazione sarebbe più lunga e il valore di IHL aumenterebbe di conseguenza. Il valore massimo di IHL è 15, indicando una lunghezza massima dell’intestazione di 60 byte.
+
+In caso il pacchetto IP non contenga opzioni, l’IHL avrà il valore tipico di 5. Qualsiasi valore superiore indica la presenza di opzioni nell’intestazione. Questo campo è essenziale per consentire ai dispositivi di rete, come i router, di processare correttamente i pacchetti IP e gestire il payload corrispondente in modo appropriato.
+
+
+
+<b> TOS </b>
+
+Il campo Type of Service (ToS) nel protocollo Internet versione 4 (IPv4) era originariamente inteso per permettere ai dispositivi di rete di fornire un trattamento differenziato ai pacchetti IP in base alle loro esigenze di servizio. Il campo ToS è lungo 8 bit e si trova nell’intestazione di un pacchetto IPv4. L’intenzione era quella di utilizzare questo campo per specificare parametri come la priorità del traffico, la qualità del servizio (QoS) e la richiesta di servizi come una latenza ridotta, un’elevata affidabilità o un basso costo per il trasferimento dei dati.
+
+
+l’intenzione originale del campo ToS era quella di fornire un modo per le sorgenti di pacchetti di esprimere le loro preferenze per come i pacchetti venissero trattati alla consegna. Con la moderna QoS e DiffServ, le funzionalità del campo ToS sono state ampliate e migliorate per fornire un controllo ancora più granulare e una gestione più efficace del traffico di rete.
+
+Il campo ToS si divideva originally in diversi bit con funzioni diverse:
+
+1. Precedence (3 bit più significativi): Indicava la priorità del pacchetto con valori che andavano da 0 (normale priorità) a 7 (priorità più alta). Con sette livelli di priorità possibili, i pacchetti potevano essere instradati in modo da favorire quelli con un livello di priorità più alto in caso di congestione di rete.
+
+2. Delayed (D bit): Indicava se il pacchetto doveva essere ottimizzato per la latenza ridotta.
+
+3. Throughput (T bit): Stabiliva se l’obiettivo era massimizzare la quantità di dati trasferibili.
+
+4. Reliability (R bit): Specificava se la affidabilità (ad esempio, meno errori e meno perdite di pacchetti) era più importante rispetto alle altre metriche.
+
+5. Cost (C bit): Indicava se il percorso a basso costo era preferito rispetto a quelli a maggiore larghezza di banda o affidabilità.
+
+6. I restanti bit (2 bit) erano in origine non utilizzati o riservati per usi futuri.
+
+_______________________
+
+
+<b> Riga 2 </b>
+
+Identification: This field uniquely identifies each packet. It can be critical in reassembling fragmented packets.
+IP Flags: This field defines whether the packet is fragmented (M) or not (D). The manipulation of the field can be used to evade IDS and firewalls. Check out my tutorials on nmap and hping3 on how we can manipulate packets to evade intrusion detection
 
 
 
