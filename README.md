@@ -73,54 +73,36 @@ Ricordando che 1 bytes -> 8 bit
 
 Le classi di indirizzi IP definiscono gruppi di indirizzi IPv4 che sono divisi in blocchi basati sulla loro destinazione originale e capacità della rete. L’impostazione delle classi di indirizzo IP era le fondamenta del sistema originale di indirizzamento IP, che è stato successivamente affinato con l’introduzione della notazione CIDR (Classless Inter-Domain Routing) per un uso più efficiente dello spazio di indirizzamento.
 
-Ecco una panoramica delle classi di indirizzi IP tradizionali:
-
-### Classe A
-- Intervallo di indirizzi: 1.0.0.0 a 126.0.0.0
-- Netmask di default: 255.0.0.0 o /8
-- Numero di reti: 128 (perché il primo bit è fisso a ‘0’)
-- Host per rete: Circa 16.7 milioni (2^24 - 2, escludendo l’indirizzo di rete e di broadcast)
-
-La classe A era destinata alle organizzazioni più grandi con milioni di host nella stessa rete.
-
-### Classe B
-- Intervallo di indirizzi: 128.0.0.0 a 191.255.0.0
-- Netmask di default: 255.255.0.0 o /16
-- Numero di reti: 16.384 (perché i primi due bit sono fissi a ‘10’)
-- Host per rete: Circa 65.000 (2^16 - 2)
-
-Gli indirizzi della classe B erano riservati per le organizzazioni medie-grandi con migliaia di dispositivi.
-
-### Classe C
-- Intervallo di indirizzi: 192.0.0.0 a 223.255.255.0
-- Netmask di default: 255.255.255.0 o /24
-- Numero di reti: 2.097.152 (perché i primi tre bit sono fissi a ‘110’)
-- Host per rete: 254 (2^8 - 2)
-
-Gli indirizzi della classe C erano orientati a piccole reti con fino a 254 dispositivi.
-
-### Classe D (Multicast)
-- Intervallo di indirizzi: 224.0.0.0 a 239.255.255.255
-- Usato per il multicast e non per l’assegnazione a singoli host.
-- Non ha una netmask standard poiché non sono designati per reti tradizionali.
-
-### Classe E (Ricerca)
-- Intervallo di indirizzi: 240.0.0.0 a 255.255.255.254
-- Riservato per l’uso sperimentale, per la ricerca o per scopi futuri.
-- Come la Classe D, non è destinato all’assegnazione ad host di rete.
+Class A: 0.0.0.0 - 127.255.255.255
+Class B: 128.0.0.0 - 191.255.255.255
+Class C: 192.0.0.0 - 223.255.255.255
 
 Ogni classe di indirizzi IP aveva una finalità specifica, ma questo schema si è rivelato inefficiente con il passare del tempo e l’espansione di Internet. L’introduzione della CIDR ha permesso di allocare gli indirizzi IP in modo più flessibile, basato su esigenze di rete variabili piuttosto che su un sistema di classi fisse, mitigando la rapida esauribilità dell’IPv4.
 
 Gli indirizzi IP attuali vengono quindi distribuiti e gestiti in maniera “classless”, con blocchi di indirizzi allocati a enti e organizzazioni in base ai loro specifici bisogni e con netmask (o prefissi) di varie lunghezze, consentendo un uso più granulare e ottimizzato dell’indirizzamento IP.
 
 
+# PUBLIC VS PRIVATE IP ADDRESSES
 
 
+È importante notare che il nostro sistema di indirizzi IP ha dei limiti.
+Il limite più significativo è che non ci sono abbastanza indirizzi IP per coprire tutti i dispositivi che devono connettersi a Internet. 
+Il sistema IPv4 con cui lavoriamo oggi ha solo 4,3 miliardi di indirizzi IP. Con 7,5 miliardi di persone sul pianeta e un numero molto più elevato di dispositivi, questo non è certamente sufficiente.
+Di conseguenza, è stato sviluppato un sistema per riutilizzare un gruppo di indirizzi IP all'interno di una LAN, che non sono utilizzabili su Internet. 
+Questi indirizzi possono essere utilizzati più volte all'interno di ogni rete locale, ma non su Internet, conservando così il numero di indirizzi IP
+
+Questi indirizzi privati includono:
+
+192.168.0.0 - 192.168.255.255
+10.0.0.0 - 10.255.255.255
+172.16.0.0 - 172.16.255.255
 
 
+<img width="200" alt="Screenshot 2024-02-08 alle 11 15 30" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/6ccec07b-fc1f-4347-81f7-60d8f40a86d6">
 
 
-
+This is your private IP that is only usable on the local area network.
+To communicate over the internet, your IP address must be translated to a public IP by a NAT device
 
 
 
