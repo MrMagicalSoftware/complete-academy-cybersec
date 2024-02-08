@@ -67,7 +67,51 @@ Ricordando che 1 bytes -> 8 bit
 
 
 
+# Panoramica sulle classi di ip
 
+
+
+Le classi di indirizzi IP definiscono gruppi di indirizzi IPv4 che sono divisi in blocchi basati sulla loro destinazione originale e capacità della rete. L’impostazione delle classi di indirizzo IP era le fondamenta del sistema originale di indirizzamento IP, che è stato successivamente affinato con l’introduzione della notazione CIDR (Classless Inter-Domain Routing) per un uso più efficiente dello spazio di indirizzamento.
+
+Ecco una panoramica delle classi di indirizzi IP tradizionali:
+
+### Classe A
+- Intervallo di indirizzi: 1.0.0.0 a 126.0.0.0
+- Netmask di default: 255.0.0.0 o /8
+- Numero di reti: 128 (perché il primo bit è fisso a ‘0’)
+- Host per rete: Circa 16.7 milioni (2^24 - 2, escludendo l’indirizzo di rete e di broadcast)
+
+La classe A era destinata alle organizzazioni più grandi con milioni di host nella stessa rete.
+
+### Classe B
+- Intervallo di indirizzi: 128.0.0.0 a 191.255.0.0
+- Netmask di default: 255.255.0.0 o /16
+- Numero di reti: 16.384 (perché i primi due bit sono fissi a ‘10’)
+- Host per rete: Circa 65.000 (2^16 - 2)
+
+Gli indirizzi della classe B erano riservati per le organizzazioni medie-grandi con migliaia di dispositivi.
+
+### Classe C
+- Intervallo di indirizzi: 192.0.0.0 a 223.255.255.0
+- Netmask di default: 255.255.255.0 o /24
+- Numero di reti: 2.097.152 (perché i primi tre bit sono fissi a ‘110’)
+- Host per rete: 254 (2^8 - 2)
+
+Gli indirizzi della classe C erano orientati a piccole reti con fino a 254 dispositivi.
+
+### Classe D (Multicast)
+- Intervallo di indirizzi: 224.0.0.0 a 239.255.255.255
+- Usato per il multicast e non per l’assegnazione a singoli host.
+- Non ha una netmask standard poiché non sono designati per reti tradizionali.
+
+### Classe E (Ricerca)
+- Intervallo di indirizzi: 240.0.0.0 a 255.255.255.254
+- Riservato per l’uso sperimentale, per la ricerca o per scopi futuri.
+- Come la Classe D, non è destinato all’assegnazione ad host di rete.
+
+Ogni classe di indirizzi IP aveva una finalità specifica, ma questo schema si è rivelato inefficiente con il passare del tempo e l’espansione di Internet. L’introduzione della CIDR ha permesso di allocare gli indirizzi IP in modo più flessibile, basato su esigenze di rete variabili piuttosto che su un sistema di classi fisse, mitigando la rapida esauribilità dell’IPv4.
+
+Gli indirizzi IP attuali vengono quindi distribuiti e gestiti in maniera “classless”, con blocchi di indirizzi allocati a enti e organizzazioni in base ai loro specifici bisogni e con netmask (o prefissi) di varie lunghezze, consentendo un uso più granulare e ottimizzato dell’indirizzamento IP.
 
 
 
