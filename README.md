@@ -222,6 +222,70 @@ Il comando `ipconfig` è utilizzato su sistemi operativi Windows per visualizzar
     ```
 
 
+___________________________________________________________________________________________
+
+
+# COMANDO IP (SISTEMI LINUX )
+
+Comando preferibile rispetto ad ifconfig
+
+
+Il comando `ip` su Linux è un potente strumento di configurazione di rete che offre molte funzionalità avanzate rispetto al più tradizionale `ifconfig`.
+
+1. **Visualizzare tutte le informazioni sulle interfacce di rete:**
+   ```bash
+   ip addr show
+   ```
+
+2. **Visualizzare informazioni specifiche su un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   ip addr show eth0
+   ```
+
+3. **Attivare un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ip link set dev eth0 up
+   ```
+
+4. **Disattivare un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ip link set dev eth0 down
+   ```
+
+5. **Assegnare un indirizzo IP statico a un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ip addr add 192.168.1.2/24 dev eth0
+   ```
+
+6. **Rimuovere un indirizzo IP da un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ip addr del 192.168.1.2/24 dev eth0
+   ```
+
+7. **Visualizzare la tabella di routing:**
+   ```bash
+   ip route show
+   ```
+
+8. **Aggiungere una rotta statica:**
+   ```bash
+   sudo ip route add 192.168.2.0/24 via 192.168.1.1 dev eth0
+   ```
+
+9. **Cambiare il MAC address di un'interfaccia (ad esempio, eth0):**
+   ```bash
+   sudo ip link set dev eth0 address 00:11:22:33:44:55
+   ```
+
+10. **Abilitare la modalità promiscua su un'interfaccia di rete (ad esempio, eth0):**
+    ```bash
+    sudo ip link set dev eth0 promisc on
+    ```
+
+11. **Disabilitare la modalità promiscua su un'interfaccia di rete (ad esempio, eth0):**
+    ```bash
+    sudo ip link set dev eth0 promisc off
+    ```
 
 
 
