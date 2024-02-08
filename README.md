@@ -288,6 +288,11 @@ Il comando `ip` su Linux è un potente strumento di configurazione di rete che o
     ```
 
 
+# PROTOCOLLO DHCP
+
+<img width="526" alt="Screenshot 2024-02-08 alle 14 14 21" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/be35623b-cb0e-466c-a0e8-bfbd209dfa6e">
+
+
 
 
 
