@@ -295,6 +295,127 @@ Il comando `ip` su Linux è un potente strumento di configurazione di rete che o
 
 
 
+Il protocollo DHCP (Dynamic Host Configuration Protocol) è un protocollo di rete utilizzato per assegnare automaticamente gli indirizzi IP e altri parametri di configurazione di rete ai dispositivi client, consentendo loro di connettersi a una rete senza richiedere intervento manuale. DHCP è ampiamente utilizzato in quasi tutte le reti moderne, incluse quelle domestiche, aziendali e pubbliche.
+
+Funzionamento di DHCP:
+
+Quando un dispositivo (client) si connette a una rete, segue un processo DHCP a quattro fasi, noto anche come DORA (Discover, Offer, Request, Acknowledge):
+
+1. Discover: Il client invia un messaggio broadcast (a tutti i dispositivi nella rete) chiamato DHCP Discover per cercare server DHCP disponibili.
+
+2. Offer: I server DHCP che ricevono il messaggio Discover rispondono con un messaggio DHCP Offer, che include un indirizzo IP che il server è disposto ad assegnare al client, oltre ad altre informazioni di configurazione come il lease time (il tempo per cui l’indirizzo può essere utilizzato), il gateway predefinito, e i server DNS.
+
+3. Request: Il client riceve una o più offerte e sceglie una. Poi invia un messaggio broadcast DHCP Request per informare tutti i server DHCP sulla scelta dell’offerta accettata e per richiedere l’indirizzo IP proposto.
+
+4. Acknowledge: Il server DHCP selezionato risponde con un messaggio DHCP Acknowledge, confermando l’assegnazione dell’indirizzo IP e di altri parametri di configurazione al client. Se invece avviene un problema, il server invierà un messaggio DHCP Nak (negative acknowledgment), e il client dovrà iniziare nuovamente il processo.
+
+Esempio:
+
+Si immagini di  avere un router domestico con DHCP abilitato e un nuovo smartphone che vuoi connettere alla tua rete Wi-Fi.
+
+1. Discover: Il tuo smartphone si connette alla rete Wi-Fi e automaticamente invia un messaggio di Discover per cercare un server DHCP nella rete per ottenere un indirizzo IP.
+
+2. Offer: Il router, agendo come server DHCP, riceve il messaggio di Discover e risponde al tuo smartphone con un’offerta che include un indirizzo IP disponibile, ad esempio 192.168.1.10, insieme al lease time (es. 24 ore), l’indirizzo del gateway (il router stesso, ad esempio 192.168.1.1), e gli indirizzi dei server DNS (es. 8.8.8.8, fornito da Google).
+
+3. Request: Il tuo smartphone seleziona questa offerta e invia un messaggio di Request indietro al router per accettare l’indirizzo IP di 192.168.1.10.
+
+4. Acknowledge: Il router conferma la selezione inviando al tuo smartphone un messaggio Acknowledge e allo stesso tempo aggiorna la sua tabella di allocazione DHCP per indicare che l’indirizzo 192.168.1.10 è ora assegnato al tuo smartphone per la durata del lease.
+
+Dopo l’acknowledge, il tuo smartphone può comunicare con altri dispositivi nella rete locale e su internet utilizzando l’indirizzo IP assegnato.
+
+Il processo è completamente trasparente e si svolge in pochi secondi, il che lo rende uno degli elementi chiave per la semplicità e l’efficienza delle moderne reti di computer.
+
+
+# PROTOCOLLO NAT
+
+
+Il protocollo NAT (Network Address Translation) è una tecnica utilizzata in reti di computer per trasformare gli indirizzi IP utilizzati all’interno di una rete privata in indirizzi IP utilizzabili su Internet, e viceversa. Tale processo è vitale per consentire ai dispositivi con indirizzi IP privati (che non sono univoci e non possono essere utilizzati su Internet) di comunicare con dispositivi esterni alla loro rete locale.
+
+Le reti private comunemente usano una gamma di indirizzi IP specificata dalla RFC 1918, che non si sovrappone con gli indirizzi IP assegnati su Internet. Questo risulta necessario per evitare esaurimento degli indirizzi IPv4, dato che questi indirizzi sono limitati in numero. NAT permette a molteplici dispositivi su una rete privata di condividere un singolo indirizzo IP pubblico.
+
+Esempio di NAT:
+
+Immagina di avere una rete domestica con vari dispositivi (PC, smartphone, tablet, ecc.) che utilizzano indirizzi IP assegnati privatamente dal tuo router, ad esempio 192.168.1.2, 192.168.1.3, ecc. Il tuo router è l’unico dispositivo nella tua rete che possiede un indirizzo IP pubblico, ad esempio 203.0.113.5, assegnato dal fornitore di servizi Internet (ISP).
+
+Supponiamo che uno dei tuoi dispositivi, diciamo il PC con l’indirizzo IP 192.168.1.2, voglia connettersi a un sito web Internet. Ecco come funzionerebbe con NAT:
+
+1. Il tuo PC inizia inviando una richiesta di connessione TCP alla destinazione sul web, usando il suo indirizzo IP privato come sorgente e l’indirizzo IP del sito web come destinazione.
+
+2. Il router riceve la richiesta e utilizza NAT per modificare l’indirizzo IP sorgente da 192.168.1.2 (privato) in 203.0.113.5 (pubblico), cambiando anche il numero di porta sorgente in uno univoco che tiene traccia della sessione (per esempio 12345).
+
+3. Il router invia la richiesta modificata a Internet, dove il sito web vede la richiesta come proveniente dall’indirizzo IP pubblico del router (203.0.113.5 con porta 12345), non sapendo nulla del dispositivo reale all’interno della tua rete.
+
+4. Quando il sito web risponde, invia i dati al tuo indirizzo IP pubblico (203.0.113.5 con porta 12345).
+
+5. Il router riceve la risposta e attraverso una tabella di traduzione NAT, determina a quale dispositivo e porta interna inoltrare i dati. In questo caso, riconosce che la porta 12345 corrisponde alla sessione originata dal PC all’indirizzo 192.168.1.2.
+
+6. Il router trasforma nuovamente il pacchetto invertendo la traduzione NAT, sostituendo l’indirizzo IP pubblico e la porta con l’indirizzo IP privato e la porta originale del PC (192.168.1.2), e invia i dati al PC.
+
+Spiegazione:
+
+In sostanza, NAT consente ai dispositivi all’interno di una rete privata di utilizzare un unico indirizzo IP pubblico per tutte le loro comunicazioni esterne. Il router tiene traccia delle sessioni usando le porte di rete al fine di distinguere quale traffico in ingresso dai server web (o da altri servizi Internet) deve essere inoltrato a quale dispositivo all’interno della rete privata.
+
+Questo processo consente di risparmiare indirizzi IP (dato che ce ne sono meno di quanti sarebbero necessari altrimenti) e fornisce un livello di sicurezza aggiunto, nascondendo gli indirizzi IP privati dei dispositivi dall’esterno della rete domestica. Tuttavia, NAT può introdurre complicazioni per alcuni protocolli di rete che richiedono la connettività in entrata o che necessitano di conoscere l’indirizzo IP reale del dispositivo, e per questo possono essere necessarie configurazioni aggiuntive come il port forwarding.
+
+
+# PORTE
+
+PRINCIPALI PORTE : 
+https://it.wikipedia.org/wiki/Porte_TCP_e_UDP_standard
+
+
+
+Le porte sono un tipo di sottoindirizzo. L'indirizzo IP è l'indirizzo principale, mentre la porta è il sottoindirizzo. Utilizzando una metafora ben collaudata ma efficace, si pensi all'indirizzo IP come all'indirizzo stradale di un edificio e alla porta come al numero dell'appartamento. L'indirizzo stradale mi serve per arrivare all'edificio corretto, ma l'indirizzo dell'appartamento mi serve per trovare la singola persona. Questo è simile alle porte. L'indirizzo IP ci porta all'host giusto, ma la porta ci porta al servizio appropriato, ad esempio HTTP sulla porta 80.
+Esistono 65.536 porte (2 elevato alla sedicesima potenza). Le prime 1.024 sono generalmente chiamate "porte comuni".
+
+
+Le porte TCP (Transmission Control Protocol) e UDP (User Datagram Protocol) sono assegnazioni numeriche utilizzate nei protocolli di rete per distinguere tra diversi servizi o applicazioni che si eseguono su un singolo dispositivo. Entrambi fanno parte della suite di protocolli internet (TCP/IP) e agiscono come meccanismi di indirizzamento all’interno di una rete, in particolare a livello di trasporto (il quarto livello nel modello OSI o il terzo livello nel modello internet).
+
+TCP è un protocollo orientato alla connessione, garantendo che tutti i pacchetti inviati siano ricevuti correttamente e nell’ordine corretto. Riesce a gestire la riconsegna dei pacchetti persi e gestisce il controllo di flusso e la congestione della rete.
+
+UDP è un protocollo senza connessione, non garantisce l’ordine di arrivo o la consegna dei pacchetti, rendendolo più leggero e più veloce di TCP, ma meno affidabile. È utile per servizi che richiedono trasmissioni veloci e in tempo reale, come lo streaming video, i giochi online e le chiamate VoIP, dove la perdita di qualche pacchetto è accettabile e meno critica.
+
+Come funzionano le porte TCP/UDP:
+
+Quando i dati vengono inviati attraverso la rete, sono divisi in piccoli pezzi detti pacchetti. Ogni pacchetto include un’intestazione (header) con diverse informazioni, tra cui il numero di porta sorgente e il numero di porta di destinazione. Questi numeri di porte indicano quale programma o servizio dovrà gestire quel pacchetto.
+
+Ad esempio, se apri un sito web, il tuo browser utilizza il protocollo HTTP o HTTPS, che di default sono assegnati rispettivamente alle porte TCP 80 e 443. Quando fai una richiesta web, il pacchetto viene inviato alla porta 80 o 443 sul server web di destinazione.
+
+Esempi comuni di porte TCP/UDP:
+
+- HTTP (per i siti web): porta TCP 80
+- HTTPS (per i siti web sicuri): porta TCP 443
+- FTP (File Transfer Protocol): porte TCP 20 (per il trasferimento dati) e 21 (per il controllo della connessione)
+- SMTP (Simple Mail Transfer Protocol, per l’invio di email): porta TCP 25
+- IMAP (Internet Message Access Protocol, per ricevere email): porta TCP 143
+- DNS (Domain Name System): porta UDP 53 (anche TCP per le risposte di dimensioni maggiori)
+- DHCP (Dynamic Host Configuration Protocol): porte UDP 67 e 68
+- RTP (Real-time Transport Protocol, spesso utilizzato nelle applicazioni di streaming multimediale): porte UDP nell’intervallo dinamico (solitamente da 16384 a 32767)
+
+Le porte vanno da 0 a 65535. Di queste, le porte da 0 a 1023 sono considerate “porte ben note” e sono riservate per servizi ben definiti e ampiamente usati come quelli sopra elencati. Le porte da 1024 a 49151 sono “porte registrate” assegnate per l’uso da protocolli e applicazioni specifici. Infine, le porte da 49152 a 65535 sono “porte dinamiche” o “private”, spesso utilizzate per comunicazioni peer-to-peer o sessioni temporanee
+
+
+<b>TOOL nmap </b>
+ 
+ ```bash
+   sudo nmap –sT <IP address of the target system>
+ ```bash
+
+
+# NOTA
+A protocol simply defines a way of communication with all its rules. These rules are usually defined by an RFC (Request for Comments).
+There are many, many protocols in use on the internet. These include TCP, IP, UDP, FTP, HTTP, SMTP, etc., and each has its own set of rules that must be complied with to communicate effectively (similar to the rules we use in communication via written languages).
+
+
+PROTOCOLLO PRINCIPE TCP/IP
+
+
+
+
+
+# PROTOCOLLO IP ( INTERNET PROTOCOL ) 
+
+
 
 
 
