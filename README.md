@@ -589,3 +589,6 @@ SYN (Synchronize): Il flag SYN viene utilizzato per stabilire una connessione TC
 
 
 
+
+_____________________________
+
