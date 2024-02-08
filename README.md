@@ -587,8 +587,130 @@ RST (Reset): Il flag Reset viene utilizzato per resettare una connessione. Se un
 
 SYN (Synchronize): Il flag SYN viene utilizzato per stabilire una connessione TCP tra due host. Durante la fase di apertura della connessione TCP, conosciuta come handshake a tre vie, l’host che inizia la connessione invia un segmento con il flag SYN impostato per sincronizzare i numeri di sequenza tra i due endpoint.
 
+FIN (Finish): Il flag FIN viene utilizzato per chiudere una connessione TCP. Un host invia un segmento con il flag FIN impostato per indicare che ha finito di inviare dati e vuole terminare la connessione. Dopo la ricezione del segmento FIN, l’altro endpoint conferma la richiesta di chiusura con un segmento ACK e può a sua volta inviare un FIN per chiudere la connessione da entrambe le parti.
 
+<b> Nota </b>
 
+Utilizzano nmap e creando pacchetti con combinazioni di flag che non dovrebbero essere viste in natura, potremmo essere in grado di suscitare 
+una risposta da un sistema molto sicuro o addirittura di eludere il rilevamento.
 
+Dimensione della finestra: In alcuni diagrammi è descritto semplicemente come campo Window. Il suo ruolo è quello di comunicare la dimensione della finestra che lo stack TCP ha per bufferizzare i pacchetti. È il modo in cui il TCP gestisce il controllo di flusso. Dal punto di vista della ricognizione o della forensics, questo campo può essere sufficiente per identificare il sistema operativo che ha inviato il pacchetto. Questo campo varia da OS a OS e persino da service pack a service pack. Con queste informazioni, si può prevedere con circa l'80% di precisione il sistema operativo che ha inviato il pacchetto. 
 _____________________________
+
+
+Row 5
+
+Checksum: This field uses a simple algorithm to check for errors. In essence, it is an integrity checker.
+URG Pointer: This field points to the last byte of the sequence number of urgent data. The URG flag must be set in conjunction to activate this field.
+
+Row 6
+
+Options: Like the IP header, the TCP header has an options field to be used if necessary, and it is varying length.
+Padding: The padding is necessary to bring the TCP header to a multiple of 32 bits.
+
+__________________________________
+
+
+Nmap (Network Mapper) è uno strumento di sicurezza della rete, utilizzato per eseguire la scansione delle porte, l’enumerazione delle reti e la rilevazione delle vulnerabilità. Ecco come si possono utilizzare le opzioni per eseguire scansioni specifiche che coinvolgono i flag TCP SYN, FIN, ACK, RST, URG, e PSH:
+
+### Scansione SYN (Half-Open Scan)
+
+La scansione SYN (o half-open scan) è un tipo comune di scansione Nmap che invia pacchetti SYN a un obiettivo per vedere come risponde:
+
+
+nmap -sS [target]
+
+
+
+Dove [target] può essere un indirizzo IP o un range di indirizzi IP, un nome di dominio, ecc.
+
+### Scansione FIN
+
+Un’altra forma di scansione stealth, la scansione FIN, invia pacchetti TCP con il flag FIN impostato per vedere come risponde il dispositivo di destinazione. Questo può essere utilizzato per sondare un sistema senza innescare log di connessioni complete sul target:
+
+
+nmap -sF [target]
+
+
+
+### Scansione ACK (Per verificare i filtri)
+
+La scansione ACK può essere utilizzata per determinare se i pacchetti con il flag ACK passano attraverso un firewall e quindi mappare le regole di filtraggio:
+
+
+nmap -sA [target]
+
+
+
+### Scansione Window
+
+Una scansione Window è simile alla scansione ACK ma controlla le variazioni nella lunghezza della finestra di congestione. Non è uno standard di Nmap, ma può essere realizzata con l’opzione --scanflags che verrà presto discussa.
+
+### Scansione Maimon
+
+Questa è una scansione che invia pacchetti con i flag FIN e ACK impostati, prendendo il nome dal ricercatore che ha scoperto che questo tipo di pacchetti può rivelare porte aperte:
+
+
+nmap -sM [target]
+
+
+
+### Scansione Null, FIN e Xmas
+
+Nmap consente anche combinazioni di flag come quelli Null (nessun flag impostato), FIN o Xmas (FIN, PSH, URG):
+
+- Scansione Null (nessun flag):
+
+
+nmap -sN [target]
+
+
+
+- Scansione Xmas (plant a christmas tree):
+
+
+nmap -sX [target]
+
+
+
+Le scansioni Null, FIN e Xmas possono essere efficaci contro sistemi che non rispettano la RFC 793 del TCP. Secondo la RFC, se questi pacchetti sono inviati a una porta chiusa, il sistema deve rispondere con un pacchetto RST; le porte aperte dovrebbero ignorare il pacchetto e non rispondere.
+
+### Uso di --scanflags
+
+Con l’opzione --scanflags, Nmap consente di personalizzare i flag da usare nei pacchetti TCP inviati. Questo permette una flessibilità significativa, potendo settare direttamente qualsiasi combinazione di flag SYN, ACK, FIN, RST, URG, PSH, ecc. Ad esempio, per impostare i flag SYN e URG, si può usare il seguente comando:
+
+
+nmap --scanflags URGPSH [target]
+
+
+
+
+
+
+
+
+
+
+________________________________
+
+# TCP Three-Way Handshake
+
+Every TCP connection starts with a 3-way handshake. The handshake begins with a client sending a packet with the SYN flag set saying, 
+“Hello, I want to talk to you” the server responds with a packet with the SYN and ACK flags set saying, “Hi, I’m willing and able to chat,” and
+then finally, the client sends a packet with the ACK flag set that acknowledges the response of the server, and then the data transfer can begin.
+
+
+
+<img width="460" alt="Screenshot 2024-02-08 alle 16 46 47" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/7c448fbf-8089-45bd-bc55-2e81c2cb4537">
+
+
+
+
+
+
+
+
+
+
+
 
