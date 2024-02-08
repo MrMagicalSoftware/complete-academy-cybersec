@@ -397,9 +397,12 @@ Le porte vanno da 0 a 65535. Di queste, le porte da 0 a 1023 sono considerate â€
 
 <b>TOOL nmap </b>
  
- ```bash
+ ```
+
    sudo nmap â€“sT <IP address of the target system>
- ```bash
+
+ ```
+
 
 
 
