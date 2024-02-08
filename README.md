@@ -105,7 +105,64 @@ This is your private IP that is only usable on the local area network.
 To communicate over the internet, your IP address must be translated to a public IP by a NAT device
 
 
-> COMANDI iFCONFIG
+> ifconfig
+
+
+# APPROFONDIMENTO IFCONFIG
+
+
+`ifconfig` è uno strumento di configurazione di rete ampiamente utilizzato in sistemi basati su Unix e Linux. Di seguito ti fornisco alcuni esempi di comandi `ifconfig`:
+
+1. **Visualizzare tutte le interfacce di rete disponibili:**
+   ```bash
+   ifconfig -a
+   ```
+
+2. **Visualizzare informazioni dettagliate per una specifica interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   ifconfig eth0
+   ```
+
+3. **Attivare un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ifconfig eth0 up
+   ```
+
+4. **Disattivare un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ifconfig eth0 down
+   ```
+
+5. **Assegnare un indirizzo IP statico a un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ifconfig eth0 192.168.1.2 netmask 255.255.255.0
+   ```
+
+6. **Impostare un indirizzo IP e una metrica manualmente:**
+   ```bash
+   sudo ifconfig eth0 192.168.1.2 metric 1
+   ```
+
+7. **Cambiare il MAC address di un'interfaccia (ad esempio, eth0):**
+   ```bash
+   sudo ifconfig eth0 hw ether 00:11:22:33:44:55
+   ```
+
+8. **Abilitare la modalità promiscua su un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ifconfig eth0 promisc
+   ```
+
+9. **Disabilitare la modalità promiscua su un'interfaccia di rete (ad esempio, eth0):**
+   ```bash
+   sudo ifconfig eth0 -promisc
+   ```
+
+10. **Visualizzare solo le informazioni sull'indirizzo IP di tutte le interfacce di rete:**
+    ```bash
+    ifconfig | grep "inet addr"
+    ```
+
 
 
 
