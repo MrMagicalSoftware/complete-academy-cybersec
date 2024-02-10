@@ -896,3 +896,51 @@ Gli indirizzi riservati sono blocchi specifici di indirizzi IP assegnati per sco
 
 L'uso degli indirizzi riservati è una pratica importante per garantire la stabilità e la sicurezza delle reti, evitando conflitti di indirizzamento e garantendo la corretta operatività delle comunicazioni in ambienti specifici.
 
+
+_____________________________________________
+
+
+```
+> ipcalc 192.168.1.7 /16
+```
+
+Siccome l'indirizzo è a 32 bit -> 8 bit -> 192 , 168 -> 8 bit  ecc
+
+/ 16 significa che per indicare la rete uso 192.168 , mentre la restante parte mi identifica l'host
+
+totale degli host ho 65536 - 2 ( indirizzo di broadcast e nome della rete  )
+
+
+Cosa succede se faccio ?
+
+> ipcalc 192.168.1.7 /25
+
+
+CIDR NOTATION.
+
+CIDR, o Classless Inter-Domain Routing notation, è un modo di rappresentare un indirizzo IP e la maschera di rete ad esso associata. La notazione CIDR specifica un indirizzo IP, una barra (/) e un numero decimale come 192.168.1.0/24, dove il 24 rappresenta il numero di bit della maschera di rete. Naturalmente, il numero di bit può variare a seconda del numero di sottoreti.
+
+
+
+# NETWORK ANALYSIS
+
+
+<img width="595" alt="Screenshot 2024-02-10 alle 14 53 19" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/b0f4d3b8-919e-43fa-8dba-2f94686cf876">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
