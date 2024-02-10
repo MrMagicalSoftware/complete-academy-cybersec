@@ -1226,6 +1226,27 @@ tcpdump not host 192.168.0.114
 ```
 
 
+
+**Filtering for Passwords and Identifying Artifacts**
+
+To filter for passwords in cleartext, we could build a filter for various ports and then use egrep to search for strings indicating logins or passwords.
+```
+tcpdump port 80 or port 21 or port 25 or port 110 or port 143 or port 23 –lA | egrep –i B5 ‘pass=|pwd=|log=|login=|user=|username=|pw=|passw=|password=’
+```
+
+Finally, if you want to filter for just the user agent (an identifying signature of the user and their browser) we could create a filter such as:
+```
+tcpdump –vvAls | grep ‘User-Agent’
+
+```
+
+
+Finally, to filter for just the browser cookies, we can create the following filter.
+```
+tcpdump –vvAls | grep ‘Set-Cookie|Host|Cookie:’
+```
+
+
 _____________________________________________________________________________________________________________
 
 
