@@ -912,9 +912,9 @@ totale degli host ho 65536 - 2 ( indirizzo di broadcast e nome della rete  )
 
 
 Cosa succede se faccio ?
-
+```
 > ipcalc 192.168.1.7 /25
-
+```
 
 CIDR NOTATION.
 
@@ -930,15 +930,165 @@ CIDR, o Classless Inter-Domain Routing notation, è un modo di rappresentare un 
 
 
 
+Comando ping
+
+
+Il comando ping è una utilità di rete comune utilizzata per testare la connettività tra due dispositivi su una rete IP
+
+```
+ping hackers-arise.com
+```
 
 
 
+Alcuni comuni parametri aggiuntivi del comando ping includono:
+
+    -c: Specifica il numero di pacchetti da inviare. Ad esempio, -c 4 invierà 4 pacchetti.
+    -i: Specifica l'intervallo di tempo tra l'invio di ogni pacchetto.
+    -t (solo su Windows): Pinga continuamente il dispositivo di destinazione fino a quando viene interrotto manualmente.
+
+Ad esempio:
 
 
 
+bash
+```
+ping -c 4 -i 1 192.168.1.1
+```
+Questo invierà 4 pacchetti a 192.168.1.1 con un intervallo di 1 secondo tra ciascun pacchetto.
 
 
 
+Il comando `netstat` è un'utilità di rete disponibile su molti sistemi operativi, inclusi Linux, Windows e macOS. Esso fornisce informazioni dettagliate sullo stato delle connessioni di rete, delle interfacce di rete, delle tabelle di routing, dei servizi in ascolto e altro ancora. L'output specifico può variare a seconda del sistema operativo e delle opzioni specificate.
+
+
+This can help with monitoring and troubleshooting network connections. In some cases, I have used it to find malware connecting to my system.
+
+Ecco alcuni esempi di come utilizzare il comando `netstat`:
+
+1. **Visualizzare tutte le connessioni di rete:**
+   ```bash
+   netstat -a
+   ```
+   Questo comando mostra tutte le connessioni di rete, sia in ascolto che in stato di established.
+
+2. **Visualizzare le connessioni di rete con informazioni dettagliate:**
+   ```bash
+   netstat -an
+   ```
+   Questo comando mostra le connessioni di rete con dettagli come indirizzo IP e numero di porta.
+
+3. **Visualizzare le statistiche delle interfacce di rete:**
+   ```bash
+   netstat -i
+   ```
+   Questo comando fornisce statistiche dettagliate sulle interfacce di rete, inclusi pacchetti trasmessi e ricevuti.
+
+4. **Visualizzare le tabelle di routing:**
+   ```bash
+   netstat -r
+   ```
+   Questo comando mostra le tabelle di routing del sistema.
+
+5. **Visualizzare i servizi in ascolto:**
+   ```bash
+   netstat -l
+   ```
+   Questo comando mostra i servizi in ascolto sul sistema.
+
+6. **Visualizzare le connessioni di rete usando un determinato protocollo (es. TCP):**
+   ```bash
+   netstat -at
+   ```
+   Questo comando mostra solo le connessioni di tipo TCP.
+
+7. **Visualizzare le connessioni di rete in tempo reale (monitoraggio continuo):**
+   ```bash
+   netstat -c
+   ```
+   Questo comando aggiorna continuamente l'output, mostrando le connessioni di rete in tempo reale.
+
+
+
+Ulteriori comandi :
+
+Visualizzare tutte le connessioni tcp
+```
+> netstat -t 
+```
+
+Visualizzare tutte le connessioni udp
+
+```
+> netstat -u 
+```
+
+Visualizzare tutte le connessioni 
+```
+> netstat -l 
+```
+
+
+If you have an Apache or nginx web server running on your system listening for connections, you can check by piping netstat –a to grep http, such as
+```
+netstat –a | grep http
+```
+
+
+### comando ss
+
+Il comando `ss` è un'utilità di sistema utilizzata per visualizzare informazioni dettagliate sulle connessioni di rete, le interfacce di rete, i socket e altro ancora su sistemi Linux e UNIX-like. È spesso considerato più avanzato e più efficiente rispetto al comando `netstat`.
+(`man ss`) per ottenere ulteriori dettagli e opzioni specifiche del sistema.
+
+
+
+ **Visualizzare tutte le connessioni di rete:**
+   ```bash
+   ss
+   ```
+   Questo comando mostra tutte le connessioni di rete, inclusi i dettagli come indirizzo IP, numero di porta, stato e altro ancora.
+
+**Visualizzare le connessioni di rete in formato esteso:**
+   ```bash
+   ss -e
+   ```
+   Mostra informazioni estese, inclusi i dettagli dei processi associati alle connessioni.
+
+ **Visualizzare le connessioni di rete in formato numerico:**
+   ```bash
+   ss -n
+   ```
+   Visualizza le connessioni di rete in formato numerico senza risolvere gli indirizzi o i nomi di servizio.
+
+**Visualizzare solo le connessioni di tipo TCP:**
+   ```bash
+   ss -t
+   ```
+   Mostra solo le connessioni di tipo TCP.
+
+ **Visualizzare solo le connessioni di tipo UDP:**
+   ```bash
+   ss -u
+   ```
+   Mostra solo le connessioni di tipo UDP.
+
+**Visualizzare le statistiche sulle interfacce di rete:**
+   ```bash
+   ss -s
+   ```
+   Mostra statistiche sulle interfacce di rete, inclusi pacchetti trasmessi e ricevuti.
+
+ **Visualizzare i servizi in ascolto:**
+   ```bash
+   ss -l
+   ```
+   Mostra i servizi in ascolto sul sistema.
+
+**Visualizzare le connessioni di rete in tempo reale (monitoraggio continuo):**
+   ```bash
+   watch -n 1 ss
+   ```
+   Utilizza il comando `watch` per aggiornare continuamente l'output del comando `ss` ogni secondo.
 
 
 
