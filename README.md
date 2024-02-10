@@ -1113,5 +1113,71 @@ Many tools are capable of network sniffing, including:
 L'altro punto critico da comprendere con lo sniffing di rete è che il formato di file standard per lo sniffing è .pcap (packet capture). Ciò significa che il vostro sistema deve avere una libreria (un po' di codice riutilizzabile) per mettere i pacchetti in questo formato. Queste librerie sono libpcap sul sistema Linux o Winpcap sul sistema Windows.
 
 
+**tcpdump in Action**
+
+
+Il comando `tcpdump` è uno strumento di cattura dei pacchetti di rete disponibile su sistemi operativi UNIX-like, inclusi Linux e macOS. Esso consente di catturare e analizzare il traffico di rete in tempo reale. `tcpdump` offre una vasta gamma di opzioni per filtrare, visualizzare e analizzare i pacchetti di rete. Di solito, è necessario avere privilegi di amministratore (solitamente con `sudo`) per eseguire `tcpdump`.
+(`man tcpdump`).
+
+
+Esempi
+
+ **Catturare tutto il traffico su una interfaccia di rete:**
+   ```bash
+   sudo tcpdump -i interfaccia
+   ```
+   Sostituisci "interfaccia" con il nome della tua interfaccia di rete (ad esempio, eth0).
+
+ **Catturare solo il traffico TCP:**
+   ```bash
+   sudo tcpdump -i interfaccia tcp
+   ```
+
+**Catturare il traffico su una specifica porta:**
+   ```bash
+   sudo tcpdump -i interfaccia port numero_porta
+   ```
+   Sostituisci "numero_porta" con il numero della porta desiderata.
+
+**Catturare il traffico su un indirizzo IP specifico:**
+   ```bash
+   sudo tcpdump -i interfaccia host indirizzo_ip
+   ```
+   Sostituisci "indirizzo_ip" con l'indirizzo IP desiderato.
+
+**Catturare il traffico su una rete o sottorete specifica:**
+   ```bash
+   sudo tcpdump -i interfaccia net indirizzo_rete/maschera_sottorete
+   ```
+
+**Visualizzare dettagli in formato leggibile:**
+   ```bash
+   sudo tcpdump -i interfaccia -A
+   ```
+   Questo comando visualizza il contenuto dei pacchetti in formato testo.
+
+**Salvare la cattura su un file per l'analisi successiva:**
+   ```bash
+   sudo tcpdump -i interfaccia -w nome_file
+   ```
+   Questo salverà i pacchetti catturati in un file binario.
+
+**Leggere un file di cattura esistente:**
+   ```bash
+   sudo tcpdump -r nome_file
+   ```
+   Questo leggerà un file di cattura esistente.
+
+
+<img width="1413" alt="Screenshot 2024-02-10 alle 15 20 03" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/3352f0b7-fe0a-4e38-8b1d-81b382c61895">
+
+
+<img width="1233" alt="Screenshot 2024-02-10 alle 15 20 21" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/c89e5447-8fc6-422f-84fc-2d66354ec78f">
+
+
+
+
+
+
 
 
