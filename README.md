@@ -1091,6 +1091,27 @@ Il comando `ss` è un'utilità di sistema utilizzata per visualizzare informazio
    Utilizza il comando `watch` per aggiornare continuamente l'output del comando `ss` ogni secondo.
 
 
+### NETWORK SNIFFERS
+
+
+A network sniffer—sometimes referred to as a packet analyzer, protocol analyzer, or network traffic analyzer—can intercept and analyze network traffic that traverses a digital network. These sniffers can be invaluable to the network or security engineer, the forensic investigator, and in some cases, the hacker. For instance, if an application sends passwords over the network unencrypted, the hacker may be able to sniff and view the passwords. Since only a few applications send passwords unencrypted in our security-conscious era, the value of the sniffer to the hacker is a bit more nuanced.
+For some exploits/hacks, such as DNS or MiTM attacks, analysis of the LAN traffic can be crucial to their success, making the sniffer invaluable. Besides, sniffing a target’s traffic can reveal what sites they are visiting, their cookies, their user agent, or even their email messages (if unencrypted or you have the resources to decrypt the message).
+Many tools are capable of network sniffing, including:
+
+1. SolarWinds Deep Packet Inspection and Analysis Tool
+2. Tcpdump
+3. Windump
+4. Wireshark
+5. Network Miner
+6. Capsa
+7. tshark
+
+
+
+<b>Prerequisiti per lo sniffing</b>
+È fondamentale sottolineare che per utilizzare efficacemente uno sniffer di rete, la scheda di interfaccia di rete (NIC) deve essere in modalità promiscua. Ciò significa che la scheda NIC rileva QUALSIASI pacchetto che attraversa la rete. Di solito, le schede NIC raccolgono solo i pacchetti destinati al loro particolare indirizzo MAC (Globally Unique Physical).
+L'altro punto critico da comprendere con lo sniffing di rete è che il formato di file standard per lo sniffing è .pcap (packet capture). Ciò significa che il vostro sistema deve avere una libreria (un po' di codice riutilizzabile) per mettere i pacchetti in questo formato. Queste librerie sono libpcap sul sistema Linux o Winpcap sul sistema Windows.
+
 
 
 
