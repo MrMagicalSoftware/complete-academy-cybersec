@@ -844,15 +844,55 @@ Numero di host e sottoreti: Suddividendo una rete in sotto-reti più piccole, è
 
 
 
+<img width="672" alt="Screenshot 2024-02-10 alle 13 57 36" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/75343b14-c69f-4b97-a259-52d88867996d">
+
+____________________________
+
+
+<b> Indirizzo di broadcast </b>
+
+L'indirizzo di broadcast è un indirizzo speciale utilizzato nelle reti per inviare un messaggio a tutti gli host presenti nella stessa rete. Quando un dispositivo invia un pacchetto alla direzione di broadcast, ogni host nella rete riceverà e processerà il messaggio. Questo è utile, ad esempio, quando si desidera inviare un messaggio a tutti gli host in una rete, come un annuncio o una richiesta di risorse.
+
+L'indirizzo di broadcast varia a seconda della classe di indirizzo IP e della maschera di sottorete utilizzata. In una rete IPv4, l'indirizzo di broadcast è spesso l'indirizzo in cui tutti i bit riservati agli host sono impostati su 1. Ad esempio, in una rete con l'indirizzo IP 192.168.1.0 e una maschera di sottorete di 255.255.255.0, l'indirizzo di broadcast sarà 192.168.1.255.
+
+Nel contesto delle reti IPv6, non esiste un vero e proprio indirizzo di broadcast, ma viene utilizzato l'indirizzo multicast speciale "ff02::1", noto come "All Nodes Address". Gli host IPv6 interessati ascolteranno i pacchetti inviati a questo indirizzo multicast.
+
+
+> comando ipcalc
+
+
+<b> Indirizzo di loopback </b>
+
+
+L'indirizzo di loopback è un indirizzo speciale utilizzato per testare la connettività di una scheda di rete o per accedere ai servizi locali su un computer senza dover attraversare una rete fisica. Questo indirizzo consente di inviare pacchetti a se stessi, senza che essi lascino effettivamente la scheda di rete.
+
+In IPv4, l'indirizzo di loopback è 127.0.0.1. Può essere usato per accedere a servizi locali, come server web o database, senza doverli instradare attraverso una rete fisica. Ad esempio, digitando "http://127.0.0.1" nella barra degli indirizzi del browser, si accede al server web in esecuzione sulla stessa macchina.
+
+In IPv6, l'equivalente dell'indirizzo di loopback è "::1".
+
+L'utilizzo dell'indirizzo di loopback è particolarmente utile durante lo sviluppo e il debug di applicazioni di rete, in quanto consente di testare la funzionalità di rete senza dipendere da una connessione di rete effettiva.
 
 
 
+<b> Indirizzi riservati </b>
 
 
+Gli indirizzi riservati sono blocchi specifici di indirizzi IP assegnati per scopi speciali o interni e non sono utilizzabili su Internet pubblico. Questi indirizzi sono riservati per garantire che siano utilizzati in modo coerente e prevenire conflitti di indirizzamento. Alcuni esempi di indirizzi riservati includono:
 
+1. **Indirizzi privati IPv4**: Questi indirizzi sono assegnati per l'uso all'interno di reti private e non sono indirizzi IP pubblici. I tre blocchi principali sono:
+   - 10.0.0.0 a 10.255.255.255 (classe A)
+   - 172.16.0.0 a 172.31.255.255 (classe B)
+   - 192.168.0.0 a 192.168.255.255 (classe C)
 
+2. **Indirizzo di loopback IPv4**: 127.0.0.1 è riservato per scopi di loopback, permettendo a un dispositivo di inviare pacchetti a se stesso.
 
+3. **Indirizzi di loopback IPv6**: ::1 è l'equivalente di loopback per IPv6.
 
+4. **Indirizzi di documentazione IPv4 e IPv6**: Questi indirizzi sono utilizzati per scopi di documentazione e non dovrebbero essere utilizzati in reti operative. Ad esempio, 192.0.2.0 è un blocco riservato per esempi di documentazione.
 
+5. **Indirizzi multicast**: Alcuni blocchi di indirizzi sono riservati per l'uso multicast, come il blocco IPv4 224.0.0.0 a 239.255.255.255.
 
+6. **Indirizzi link-local IPv6**: Gli indirizzi IPv6 che iniziano con "fe80::" sono riservati per l'uso link-local, ovvero per comunicazioni su una singola rete locale.
+
+L'uso degli indirizzi riservati è una pratica importante per garantire la stabilità e la sicurezza delle reti, evitando conflitti di indirizzamento e garantendo la corretta operatività delle comunicazioni in ambienti specifici.
 
