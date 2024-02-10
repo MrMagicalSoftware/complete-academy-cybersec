@@ -706,8 +706,63 @@ then finally, the client sends a packet with the ACK flag set that acknowledges 
 
 
 
+Il TCP Three-Way Handshake è un processo utilizzato nel protocollo TCP (Transmission Control Protocol) per stabilire una connessione affidabile tra client e server su una rete basata su IP. Questa procedura è essenziale per garantire che entrambi gli endpoint siano pronti per iniziare la comunicazione e siano consapevoli della presenza l’uno dell’altro. Il three-way handshake si compone di tre fasi o passaggi:
+
+### 1. SYN (Synchronize)
+
+Il client inizia il processo inviando un segmento TCP al server in cui il flag SYN (synchronize sequence number) è impostato a 1, indicando il desiderio di stabilire una connessione. Questo segmento contiene anche un numero di sequenza iniziale (ISN), che è usato per tenere traccia dei byte trasferiti e assicurare l’ordine corretto dei dati all’arrivo.
+
+- Client --> SYN=1, Seq=X --> Server
+
+Il numero Seq=X rappresenta il numero di sequenza iniziale del client.
+
+### 2. SYN-ACK (Synchronize-Acknowledgment)
+
+Il server riceve il pacchetto SYN del client, processo che indica che il client è pronto per la comunicazione. Il server risponde inviando al client un segmento che ha sia il flag SYN che il flag ACK (acknowledgment) impostati a 1. Il numero di sequenza del server sarà un altro numero iniziale generato casualmente, e il numero di riconoscimento (ACK number) sarà incrementato di 1 rispetto al numero di sequenza iniziale del client, per riconoscere la ricezione del SYN del client.
+
+- Server --> SYN=1, ACK=1, Seq=Y, Ack=X+1 --> Client
+
+Il numero Seq=Y rappresenta il numero di sequenza iniziale del server e Ack=X+1 rappresenta la conferma della ricezione del SYN del client, indicando che il prossimo byte che il server si aspetta di ricevere dal client dovrebbe iniziare con il numero di sequenza X+1.
+
+### 3. ACK (Acknowledgment)
+
+Infine, il client invia un ulteriore segmento al server con il flag ACK impostato a 1 per confermare di aver ricevuto il segmento SYN-ACK del server. A questo punto, entrambi hanno riconosciuto i numeri di sequenza di partenza e confermato la disponibilità alla comunicazione.
+
+- Client --> ACK=1, Seq=X+1, Ack=Y+1 --> Server
+
+Il client incrementa l’ACK number a Y+1 per riconoscere di aver ricevuto il SYN dal server con il numero di sequenza Y.
+
+Al termine di questo processo, la connessione TCP è considerata stabilita, e sia il client che il server possono iniziare la trasmissione dei dati. Ciò che rende il TCP affidabile è questa conferma esplicita dei numeri di sequenza e dei riconoscimenti prima che i dati effettivi vengano trasferiti. Ogni pacchetto di dati successivamente inviato su una connessione TCP è individuato da un numero di sequenza e richiede un riconoscimento dal destinatario, assicurando che nessun byte venga perso o duplicato durante la trasmissione.
+
 ______
 
+
+
+# UDP
+
+
+User Datagram Protocol o UDP è un protocollo senza connessione (rispetto a TCP, che è orientato alla connessione e richiede una connessione come l'handshake a 3 vie visto sopra). È più leggero del TCP perché non ha l'overhead di assicurare una connessione e di assicurarsi che ogni pacchetto arrivi. UDP invia semplicemente i pacchetti e se ne dimentica. È un'ottima soluzione per le applicazioni in cui si desidera efficienza e nessun pacchetto è critico, come lo streaming di musica o video.
+Alcuni dei principali protocolli che utilizzano UDP sono il DNS (solo per le query), SNMP per la gestione dei dispositivi di rete e NTP per la sincronizzazione dell'ora di rete.
+Quando si esegue la scansione delle porte UDP con strumenti come nmap, può essere necessario un po' più di tempo poiché UDP non prevede una risposta per i pacchetti persi o le porte chiuse. Nmap attende semplicemente un tempo specifico e, se non viene restituita alcuna risposta, presume che la porta sia chiusa. È possibile eseguire una scansione UDP con nmap con il seguente comando
+kali > nmap -sU <indirizzo IP>
+
+
+
+# Network Topologies
+
+
+
+Quando i dispositivi sono collegati tra loro, esistono diverse opzioni per la disposizione fisica dei dispositivi. Questa disposizione fisica può essere molto importante per ottimizzare la distanza, la latenza, la congestione e la disponibilità di due nodi della rete. Questa configurazione fisica è nota come topologia.
+
+
+
+<b>Star Topology</b>
+
+
+La topologia a stella è la topologia più diffusa per le reti locali (LAN). Nella topologia a stella, c'è un server al centro della stella e tutti i client si collegano al server. Il vantaggio di questa topologia è che le connessioni di ciascun client sono indipendenti e se un client o la sua connessione si interrompe, gli altri client possono comunque comunicare con il server.
+
+
+<img width="482" alt="Screenshot 2024-02-10 alle 13 19 59" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/804cd2d1-6e73-4f7b-bc94-2434a8fbdd6a">
 
 
 
