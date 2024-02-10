@@ -1174,6 +1174,71 @@ Esempi
 
 <img width="1233" alt="Screenshot 2024-02-10 alle 15 20 21" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/c89e5447-8fc6-422f-84fc-2d66354ec78f">
 
+```
+tcpdump src host 192.168.0.114
+```
+Questo comando visualizzerà i pacchetti in arrivo o in partenza dall'host con indirizzo IP 192.168.0.114 sulla rete a cui è connesso l'interfaccia di rete specificata. 
+
+
+
+```
+tcpdump –vv dst port 80
+```
+
+
+-vv: Aumenta il livello di dettaglio dell'output di tcpdump. L'opzione -vv mostra più informazioni sulle intestazioni dei pacchetti, inclusi dettagli specifici sul protocollo e altri dettagli.
+
+dst port 80: Specifica un filtro sui pacchetti da catturare. Questo filtro indica di catturare solo i pacchetti in cui la porta di destinazione è 80. La porta 80 è comunemente associata ai servizi HTTP, quindi questo filtro cattura il traffico destinato ai server web.
+
+
+
+
+**Filter by TCP Flags**
+What if we wanted to see only the traffic with SYN flags sets on it? We could create a filter like this:
+```
+tcpdump ‘tcp[tcpflags]==tcp-syn’
+```
+
+Altri esempi di regole :
+
+
+kali > tcpdump ‘tcp[tcpflags]==tcp-ack’
+kali > tcpdump ‘tcp[tcpflags]==tcp-fin’ 
+kali > tcpdump ‘tcp[tcpflags]==tcp-rst’ 
+kali > tcpdump ‘tcp[tcpflags]==tcp-psh’ 
+kali > tcpdump ‘tcp[tcpflags]==tcp-urg’
+
+
+
+**Combining Filters**
+
+tcpdump enables us to use filters together using a logical AND (&&) or a logical OR (||). So, if we wanted to filter for a particular IP address and TCP port 80 we would create a filter such as:
+```
+tcpdump host 192.168.0.114 and port 80
+```
+We can also use a logical OR, such as: 
+```
+tcpdump port 80 or port 443
+```
+If we want to see all the traffic except that traveling from a particular IP address, we can use the negation symbol (!) or not.
+```
+tcpdump not host 192.168.0.114
+```
+
+
+_____________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
