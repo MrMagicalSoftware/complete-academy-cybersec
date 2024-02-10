@@ -764,6 +764,93 @@ La topologia a stella è la topologia più diffusa per le reti locali (LAN). Nel
 
 <img width="482" alt="Screenshot 2024-02-10 alle 13 19 59" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/804cd2d1-6e73-4f7b-bc94-2434a8fbdd6a">
 
+<b>Ring topology </b>
+La topologia ad anello invia i pacchetti intorno a un anello e solo il client a cui è destinato il pacchetto può prenderlo dall'anello. Il vantaggio della topologia ad anello è che è semplice e poco costosa, ma se l'anello si rompe, tutti i client non possono ricevere alcuna comunicazione.
+
+
+
+
+<img width="503" alt="Screenshot 2024-02-10 alle 13 23 46" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/1c111a91-5baa-48d4-9c2c-8600ae9fe8ca">
+
+
+
+<b>Mesh Topology</b>
+
+
+La topologia mesh prevede molte connessioni tra ogni dispositivo della rete. Ciò significa che un pacchetto ha diversi percorsi per arrivare a destinazione. Ciò conferisce alla rete una certa resilienza nel caso in cui un cavo o un percorso sia interrotto. Questo è simile al modo in cui è connessa la nostra moderna Internet: i pacchetti hanno più percorsi da seguire per raggiungere il sistema di destinazione. 
+
+
+___________________________________________________________________
+
+
+# The OSI Model
+
+
+I modelli OSI e TCP sono i più comuni per comprendere il modo in cui i vari protocolli lavorano insieme. 
+Cominciamo con il modello OSI. Il diagramma seguente mostra i sette livelli e l'uso di base di tale livello nella comunicazione di rete.
+
+
+<img width="517" alt="Screenshot 2024-02-10 alle 13 29 28" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/867ec6e1-f9d6-41c1-9571-bb163d94478f">
+
+
+Come si può notare, il modello OSI comprende sette livelli: il livello Applicazione, il livello Presentazione, il livello Sessione, il livello Trasporto, il livello Rete, il livello Collegamento dati e infine il livello Fisico. La figura precedente illustra in dettaglio i vari livelli e i protocolli e le attività associate a ciascuno di essi. Per aiutare a ricordare i vari livelli di questo modello, esistono almeno due dispositivi mnemonici. Se partiamo dall'alto e scendiamo verso il basso, possiamo prendere la prima lettera di ogni livello, ovvero A, P, S, T, N, D e P. Molte persone ricordano questi livelli utilizzando questo dispositivo mnemonico;
+
+All People Seem To Need Data Processing
+
+
+
+
+# The OSI Model from a Cybersecurity Perspective
+
+
+<img width="461" alt="Screenshot 2024-02-10 alle 13 32 45" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/417bb9bb-c7f2-42d3-b211-529ebf07f3b6">
+
+
+Il livello Applicazione comprende generalmente applicazioni come browser, word processor e altre applicazioni. Gli attacchi più importanti di questo livello sono probabilmente gli exploit. Si tratta di attacchi che spesso possono incorporare il codice dell'hacker all'interno dell'applicazione per prendere il controllo dell'applicazione e del sistema.
+Al livello Presentazione, l'attacco più preoccupante è il phishing o l'invio di e-mail a varie persone con link dannosi.
+A livello di sessione, l'attacco più importante è l'hijacking. L'hijacking consiste nel fatto che un aggressore può appropriarsi di una sessione esistente stabilita legittimamente dall'utente.
+Al livello Trasporto, l'hacker spesso effettua la sua ricognizione a questo livello.
+A livello di rete, gli aggressori possono condurre attacchi Man-in-the-Middle MiTM) in cui si interpongono tra un utente legittimo e un server, intercettando il traffico ed eventualmente alterandolo.
+
+
+Al livello Data Link, l'aggressore può falsificare gli indirizzi MAC, l'indirizzo univoco globale impresso su ogni dispositivo collegato in rete ed essenziale per il corretto funzionamento di una LAN (vedere ARP).
+Infine, il livello fisico può essere attaccato con lo sniffing. Lo sniffing è la pratica di osservare e analizzare il traffico di rete (vedere Wireshark e Sniffer).
+
+
+_______________________________________________
+
+
+
+# SUBNETTING
+
+
+
+Il subnetting è una tecnica utilizzata nella progettazione delle reti per suddividere una rete IP più grande in sotto-reti più piccole. Questo processo consente di ottimizzare l'utilizzo degli indirizzi IP disponibili e di migliorare l'efficienza della rete. In sostanza, il subnetting consente di dividere un blocco di indirizzi IP in porzioni più gestibili e organizzate.
+il subnetting è una pratica importante nella progettazione delle reti per ottimizzare l'uso degli indirizzi IP e migliorare l'efficienza complessiva della rete.
+
+
+Indirizzi IP: Un indirizzo IP è un identificatore univoco assegnato a ogni dispositivo in una rete che utilizza il protocollo Internet (IP). Gli indirizzi IP sono formati da numeri decimali separati da punti (ad esempio, 192.168.1.1).
+
+Maschera di sottorete (subnet mask): La maschera di sottorete determina quale parte di un indirizzo IP è dedicata alla rete e quale parte è riservata agli host nella rete. È rappresentata da una serie di bit a 1 seguiti da una serie di bit a 0. Ad esempio, in una maschera di sottorete 255.255.255.0, i primi 24 bit sono dedicati alla rete e gli ultimi 8 bit sono riservati agli host.
+
+Suddivisione delle reti: Utilizzando il subnetting, è possibile suddividere una rete più grande in sotto-reti più piccole. Ad esempio, se si ha un blocco di indirizzi IP come 192.168.1.0 con una maschera di sottorete 255.255.255.0, è possibile suddividere questa rete in sotto-reti più piccole.
+
+ CIDR (Classless Inter-Domain Routing): CIDR è un metodo di rappresentazione degli indirizzi IP e delle loro lunghezze di prefisso. Ad esempio, anziché usare una maschera di sottorete come 255.255.255.0, si potrebbe rappresentare la stessa informazione come /24. Questo indica che i primi 24 bit dell'indirizzo IP sono riservati alla rete.
+
+Numero di host e sottoreti: Suddividendo una rete in sotto-reti più piccole, è possibile avere più sottoreti con un numero specifico di host. Questo può essere utile per ottimizzare l'allocazione degli indirizzi IP e migliorare le prestazioni della rete.
+
+
+<img width="511" alt="Screenshot 2024-02-10 alle 13 43 51" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/0924b433-5ea5-4429-b4b0-cd5b6789ebaa">
+
+
+
+
+
+
+
+
+
+
 
 
 
