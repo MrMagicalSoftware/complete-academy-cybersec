@@ -1667,4 +1667,57 @@ I nomi di dominio devono essere registrati presso l'ICANN (Internet Corporation 
 <img width="549" alt="Screenshot 2024-02-11 alle 13 27 08" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/88be685d-abdf-43c5-afd8-42760de97f14">
 
 
+Il DNS funziona in modo gerarchico. I domini di primo livello o TLD possono avere più sottodomini.
+
+
+
+**Panoramica sul DNS:**
+
+Il Domain Name System (DNS) è un sistema distribuito che consente di associare nomi di dominio a indirizzi IP e viceversa. Funziona come un grande elenco telefonico distribuito su Internet, consentendo agli utenti di utilizzare nomi di dominio più memorizzabili al posto di indirizzi IP numerici per accedere a risorse online.
+
+Il DNS svolge un ruolo cruciale nelle comunicazioni su Internet, poiché molti protocolli, come HTTP, utilizzano nomi di dominio per identificare i server. Il sistema DNS è basato su una struttura gerarchica che consente la distribuzione delle responsabilità tra diversi server DNS.
+
+**Componenti chiave del DNS:**
+
+**Root DNS Server:**
+   Il sistema DNS inizia con i server radice, che sono al vertice della gerarchia. Ci sono un piccolo numero di server radice, etichettati con lettere dalla A alla M. Questi server indicano dove trovare i server DNS autoritativi per i domini di primo livello (TLD).
+
+**Server DNS dei Top-Level Domain (TLD):**
+   I server TLD gestiscono le richieste per i domini di primo livello (.com, .org, .net, ecc.). Esistono server TLD per ciascuna estensione di dominio, e questi server forniscono informazioni su dove trovare i server DNS autoritativi per i domini di secondo livello.
+
+**Server DNS Autoritativo:**
+   Questi server contengono informazioni dettagliate sui nomi di dominio, compresi gli indirizzi IP associati e altre informazioni come record MX (per la posta) e record NS (per i server dei nomi). Ogni dominio ha almeno uno o più server DNS autoritativi.
+
+ **Server DNS Ricorsivo:**
+   Questi server gestiscono le richieste DNS degli utenti finali. Quando un utente cerca di accedere a un sito web, il server DNS ricorsivo effettua una serie di richieste ai server radice, ai server TLD e ai server autoritativi per risolvere il nome di dominio in un indirizzo IP.
+
+**Funzionamento del DNS:**
+
+**Richiesta DNS Ricorsiva:**
+   Quando un dispositivo cerca di accedere a un sito web tramite un nome di dominio, il server DNS ricorsivo del provider di servizi Internet (ISP) o del servizio locale effettua una richiesta al sistema DNS per risolvere il nome di dominio.
+
+**Risoluzione del Dominio:**
+   Il server DNS ricorsivo inizia con una richiesta ai server radice, che indicano il server TLD appropriato. Successivamente, il server TLD indica il server DNS autoritativo per il dominio specifico.
+
+**Cache DNS:**
+   I server DNS ricorsivi mantengono una cache locale delle risoluzioni DNS recenti. Questa cache riduce il tempo di risoluzione, in quanto i risultati possono essere recuperati direttamente dalla cache se sono stati risolti di recente.
+
+**Tempo di Vita (TTL):**
+   Ogni record DNS contiene un parametro chiamato "Time to Live" (TTL), che specifica per quanto tempo le informazioni devono essere memorizzate nella cache. Dopo il periodo TTL, il record viene rimosso dalla cache e deve essere nuovamente risolto.
+
+
+**ESERCITAZIONE**
+
+Per monitorare tutti i passaggi relativi alle richieste DNS, utilizziamo comando `dig` (Domain Information Groper) con l'opzione `+trace`. Questa opzione consente di visualizzare la sequenza completa di richieste DNS dalla tua macchina fino al server autoritativo del dominio.
+
+
+```bash
+dig +trace example.com
+```
+
+Sostituisci "example.com" con il nome di dominio che desideri analizzare. L'output mostrerà una sequenza di richieste DNS, partendo dai server radice e passando attraverso i server TLD e i server autoritativi fino a raggiungere l'indirizzo IP finale associato al nome di dominio.
+
+L'output sarà dettagliato e mostrerà ciascun passo del processo di risoluzione DNS, inclusi i server coinvolti, i tempi di risposta e gli indirizzi IP associati ai nomi di dominio. Utilizzando `+trace`, si ottiene una visione completa di come avviene la risoluzione DNS per il dominio specificato.
+
+
 
