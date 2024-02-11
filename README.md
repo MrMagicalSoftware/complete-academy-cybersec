@@ -1275,6 +1275,210 @@ Cosa posso fare con Wireshark:
 <img width="487" alt="Screenshot 2024-02-11 alle 10 47 11" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/e5ba32ae-9071-4d37-a4bb-4355fdf178bc">
 
 
+In Wireshark sono presenti tre finestre di analisi separate. La finestra superiore, contrassegnata con il numero 1 nell'immagine soprastante, è nota come riquadro dell'elenco dei pacchetti. In questa finestra si vedono i pacchetti codificati a colori che si muovono in tempo reale.
+
+
+La finestra centrale, denominata #2, è nota come riquadro dei dettagli del pacchetto. Questo riquadro fornisce le informazioni sull'intestazione del pacchetto selezionato nella finestra #1.
+
+
+Infine, la finestra n. 3, riquadro Bytes del pacchetto, fornisce informazioni sul carico utile sia in formato esadecimale a sinistra che in formato ASCII a destra.
+
+
+**APPLICAZIONE DEI FILTRI**
+
+<img width="1187" alt="Screenshot 2024-02-11 alle 10 51 41" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/2f307a1a-e992-4e3b-b17d-55403051a5af">
+
+
+
+Wireshark offre un potente meccanismo di filtraggio consente di concentrarsi sui pacchetti di interesse durante l'analisi del traffico di rete. I filtri possono essere applicati attraverso la barra degli strumenti di Wireshark o attraverso la finestra di filtro.
+
+
+
+VEDI DOCUMENTAZIONE : https://wiki.wireshark.org/DisplayFilters
+
+ **Filtri per indirizzo IP:**
+   - Filtra i pacchetti con un indirizzo IP sorgente specifico: `ip.src == 192.168.1.1`
+   - Filtra i pacchetti con un indirizzo IP di destinazione specifico: `ip.dst == 192.168.1.1`
+   - Filtra i pacchetti tra due indirizzi IP: `ip.addr == 192.168.1.1`
+
+ **Filtri per protocollo:**
+   - Filtra i pacchetti HTTP: `http`
+   - Filtra i pacchetti DNS: `dns`
+   - Filtra i pacchetti TCP: `tcp`
+   - Filtra i pacchetti UDP: `udp`
+
+**Filtri per porta:**
+   - Filtra i pacchetti con una porta sorgente specifica: `tcp.srcport == 80`
+   - Filtra i pacchetti con una porta di destinazione specifica: `tcp.dstport == 443`
+   - Filtra i pacchetti con una porta specifica (sorgente o destinazione): `tcp.port == 22`
+
+**Filtri logici:**
+   - Filtra i pacchetti che soddisfano entrambe le condizioni: `ip.src == 192.168.1.1 && tcp.port == 80`
+   - Filtra i pacchetti che soddisfano una delle condizioni: `ip.src == 192.168.1.1 || ip.dst == 192.168.1.2`
+
+**Filtri per dati specifici:**
+   - Filtra i pacchetti contenenti una stringa specifica nei dati (payload): `data contains "parola_chiave"`
+   - Altro esempio : tcp contains facebook
+
+**Filtri per lunghezza dei pacchetti:**
+   - Filtra i pacchetti con una lunghezza minima specifica: `frame.len >= 100`
+   - Filtra i pacchetti con una lunghezza massima specifica: `frame.len <= 500`
+
+
+
+____________________________________________________________________________________________________
+
+
+
+
+# Linux Firewalls
+
+
+Def :
+
+A firewall is a subsystem on a computer that blocks certain network traffic from going into or out of a computer. Firewalls can be either software or hardware-based. Hardware-based firewalls generally are used to protect a network and the computers on it, while a software-based firewall protects the system hosting it.
+
+![Screenshot 2024-02-11 alle 11 00 01](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/87b9d25c-af8d-48f3-9ee9-c670369c07e5)
+
+
+
+
+**IPTABLES**
+
+```
+sudo apt install iptables
+```
+documentazione ufficiale (`man iptables`)
+
+`iptables` è un'utilità di filtraggio del pacchetto e di gestione del firewall per i sistemi basati su Linux. Consente agli amministratori di sistema di definire regole per il filtraggio del traffico di rete, consentendo o negando il passaggio di pacchetti attraverso una interfaccia di rete. 
+
+Cosa trovo in iptables :
+
+ **Tabelle:**
+   `iptables` organizza le regole in tabelle. Le tabelle principali sono:
+   - `filter`: Utilizzata per il filtraggio del traffico.
+   - `nat`: Utilizzata per la traduzione degli indirizzi di rete (Network Address Translation).
+   - `mangle`: Utilizzata per la modifica di pacchetti.
+   - `raw`: Utilizzata per regole che non dovrebbero essere modificate dalla conntrack.
+
+ **Catene (Chains):**
+   All'interno di ogni tabella, `iptables` contiene catene che rappresentano insiemi di regole. Le catene principali sono:
+   - `INPUT`: Applica le regole al traffico in arrivo.
+   - `OUTPUT`: Applica le regole al traffico in uscita.
+   - `FORWARD`: Applica le regole al traffico di attraversamento (quando il sistema agisce da router).
+   - Altre catene personalizzate possono essere create per organizzare le regole in modo più specifico.
+
+**Regole:**
+   Le regole definiscono come il traffico deve essere gestito. Ogni regola specifica un insieme di condizioni e un'azione da intraprendere se le condizioni sono soddisfatte. Le azioni comuni includono `ACCEPT` (accetta il pacchetto), `DROP` (scarta il pacchetto) e `REJECT` (scarta il pacchetto e invia un messaggio di errore al mittente).
+
+**Target:**
+   Il target è l'azione intrapresa quando una regola corrispondente viene trovata. Alcuni esempi di target includono `ACCEPT`, `DROP`, `REJECT`, `MASQUERADE` (nel caso della tabella `nat` per la NAT), ecc.
+
+Ecco un esempio semplice di utilizzo di `iptables`:
+
+```bash
+# Pulisce le regole esistenti
+sudo iptables -F
+
+# Impedisce tutto il traffico in ingresso e in uscita
+sudo iptables -P INPUT DROP
+sudo iptables -P OUTPUT DROP
+
+# Permette il traffico di loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+# Permette il traffico SSH in ingresso
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+```
+
+Questo esempio configura un firewall di base che consente solo il traffico di loopback e il traffico SSH in ingresso. È importante notare che queste regole saranno temporanee e saranno perse al riavvio del sistema a meno che non vengano salvate in modo permanente.
+
+Per salvare le regole in modo permanente su sistemi basati su Debian/Ubuntu, è possibile utilizzare il comando:
+
+```bash
+sudo iptables-save > /etc/iptables/rules.v4
+```
+
+
+**ESERCITAZIONE**
+
+
+**Esercizio 1: Introduzione a iptables**
+
+Supponiamo di avere un server Linux con due interfacce di rete: `eth0` e `eth1`. Configura un set di regole iptables per consentire il traffico SSH in ingresso solo dalla sottorete `192.168.1.0/24` sull'interfaccia `eth0`.
+
+**Soluzione:**
+```bash
+# Pulisce le regole esistenti
+sudo iptables -F
+
+# Imposta la policy predefinita a DROP
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT ACCEPT
+
+# Permette il traffico di loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+# Permette il traffico SSH in ingresso dalla sottorete 192.168.1.0/24 sull'interfaccia eth0
+sudo iptables -A INPUT -i eth0 -p tcp --dport 22 -s 192.168.1.0/24 -j ACCEPT
+```
+
+**Esercizio 2: Filtraggio avanzato con iptables**
+
+Configura iptables per consentire il traffico HTTP in ingresso solo da un singolo indirizzo IP, bloccando tutto il resto del traffico in ingresso.
+
+**Soluzione:**
+```bash
+# Pulisce le regole esistenti
+sudo iptables -F
+
+# Imposta la policy predefinita a DROP
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT ACCEPT
+
+# Permette il traffico di loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+# Permette il traffico HTTP in ingresso solo da un indirizzo IP specifico
+sudo iptables -A INPUT -p tcp --dport 80 -s indirizzo_ip_specifico -j ACCEPT
+```
+
+**Esercizio 3: Gestione delle connessioni con iptables**
+
+Configura iptables per consentire il traffico SSH in ingresso da qualsiasi indirizzo IP, ma blocca il traffico SSH in uscita solo per un intervallo specifico di porte.
+
+**Soluzione:**
+```bash
+# Pulisce le regole esistenti
+sudo iptables -F
+
+# Imposta la policy predefinita a DROP
+sudo iptables -P INPUT DROP
+sudo iptables -P FORWARD DROP
+sudo iptables -P OUTPUT DROP
+
+# Permette il traffico di loopback
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+# Permette il traffico SSH in ingresso da qualsiasi indirizzo IP
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Consente il traffico SSH in uscita solo per le porte 1024-65535
+sudo iptables -A OUTPUT -p tcp --sport 22 --dport 1024:65535 -j ACCEPT
+```
+
+
+
+
+
+
+
 
 
 
