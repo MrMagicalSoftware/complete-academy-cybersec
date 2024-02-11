@@ -1474,6 +1474,32 @@ sudo iptables -A OUTPUT -p tcp --sport 22 --dport 1024:65535 -j ACCEPT
 ```
 
 
+____________________________________________________
+
+
+# ADDRESS RESOLUTION PROTOCOL  ( ARP ) 
+
+
+<img width="410" alt="Screenshot 2024-02-11 alle 11 10 09" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/fce08f7b-0f23-4604-84f4-72ea5a30aead">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
