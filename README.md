@@ -1819,6 +1819,22 @@ example.com IN SOA ns1.example.com admin.example.com (
 8. **Tempo minimo di TTL (Time to Live):**
    - Specifica il valore minimo di TTL per tutti gli altri record nella zona. Il TTL è il periodo di tempo per cui un record può essere mantenuto nella cache di un client DNS prima che debba essere nuovamente verificato.
 
+______________________________________________________________________________
+
+**dns spoofing**
+https://www.hackers-arise.com/post/2017/05/23/Hacking-DNS-to-Re-Direct-Anyone-on-your-LAN-to-your-Website
+
+
+____________________
+
+
+
+
+
+
+
+
+
 
 
 
