@@ -1721,3 +1721,104 @@ L'output sarà dettagliato e mostrerà ciascun passo del processo di risoluzione
 
 
 
+Il sistema di Nome di Dominio (DNS) è composto da quattro componenti principali che lavorano insieme per facilitare la risoluzione dei nomi di dominio in indirizzi IP e viceversa. 
+
+1. **Cache DNS:**
+   - **Descrizione:** La cache DNS è una posizione di memorizzazione temporanea utilizzata per conservare le richieste DNS risolte in precedenza. Questa cache contribuisce a migliorare l'efficienza e la velocità delle richieste DNS successive evitando di dover ripetere l'intero processo di risoluzione per i nomi di dominio frequentemente accessati.
+   - **Funzione:** Quando un risolutore DNS o un server di nomi riceve una richiesta per un nome di dominio, prima controlla la sua cache locale. Se le informazioni sono presenti (a seguito di una richiesta recente), può rispondere immediatamente senza dover ripetere l'intera procedura di risoluzione.
+
+2. **Risolvitori (Resolvers):**
+   - **Descrizione:** I risolutori sono componenti software o hardware che inviano richieste DNS e gestiscono il processo di risoluzione. I risolutori sono spesso parte del sistema operativo o inclusi nei programmi dei browser web.
+   - **Funzione:** Quando un'applicazione o un dispositivo richiede la risoluzione di un nome di dominio, il risolutore si occupa di inoltrare la richiesta ai server DNS appropriati e ricevere la risposta.
+
+3. **Server di Nomi (Name Servers):**
+   - **Descrizione:** I server di nomi sono server specializzati responsabili della memorizzazione delle informazioni DNS per un dominio specifico. Possono essere divisi in server autoritativi e server ricorsivi.
+   - **Funzione:** I server autoritativi detengono le informazioni ufficiali su un dominio, mentre i server ricorsivi aiutano a risolvere le richieste inviate loro, cercando le informazioni attraverso la gerarchia DNS.
+
+4. **Spazio dei Nomi (Name Space):**
+   - **Descrizione:** Lo spazio dei nomi è una gerarchia strutturata e organizzata in cui sono assegnati i nomi di dominio. La gerarchia parte dal livello più alto, noto come la radice, e si dirama attraverso i domini di primo livello (TLD), i domini di secondo livello e così via.
+   - **Funzione:** Lo spazio dei nomi fornisce una struttura organizzativa per i nomi di dominio e stabilisce le regole per la creazione e l'assegnazione di nuovi domini all'interno della gerarchia. La radice, i TLD e i domini di secondo livello costituiscono parte integrante di questo spazio gerarchico.
+
+
+
+<img width="547" alt="Screenshot 2024-02-11 alle 14 27 33" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/e670bb61-181f-45c6-b4cd-e897a6c5ea2e">
+
+I record DNS (Domain Name System) contengono informazioni cruciali per la risoluzione dei nomi di dominio in indirizzi IP e svolgono un ruolo essenziale nel funzionamento di Internet. Ci sono diverse tipologie di record DNS, ognuna delle quali svolge una funzione specifica. Ecco alcune delle tipologie di record DNS più comuni:
+
+**Record A (Address Record):**
+   - **Descrizione:** Associa un nome di dominio a un indirizzo IPv4.
+   - **Esempio:** `example.com IN A 192.168.1.1`
+
+**Record AAAA (IPv6 Address Record):**
+   - **Descrizione:** Associa un nome di dominio a un indirizzo IPv6.
+   - **Esempio:** `example.com IN AAAA 2001:0db8:85a3:0000:0000:8a2e:0370:7334`
+
+ **Record CNAME (Canonical Name):**
+   - **Descrizione:** Crea un alias per un altro nome di dominio (il nome canonico). Spesso utilizzato per puntare un sotto-dominio a un dominio principale.
+   - **Esempio:** `www.example.com IN CNAME example.com`
+
+ **Record MX (Mail Exchange):**
+   - **Descrizione:** Specifica i server di posta responsabili della ricezione delle email per un dominio.
+   - **Esempio:** `example.com IN MX 10 mail.example.com`
+
+ **Record PTR (Pointer Record):**
+   - **Descrizione:** Utilizzato per la risoluzione inversa, associa un indirizzo IP a un nome di dominio.
+   - **Esempio:** `1.1.168.192.in-addr.arpa IN PTR example.com`
+
+**Record NS (Name Server):**
+   - **Descrizione:** Specifica i server di nomi autoritativi per un dominio.
+   - **Esempio:** `example.com IN NS ns1.example.com`
+
+**Record SOA (Start of Authority):**
+   - **Descrizione:** Fornisce informazioni sulla zona DNS, inclusi i parametri di gestione della zona.
+   - **Esempio:** `example.com IN SOA ns1.example.com admin.example.com 2022021001 86400 7200 3600000 86400`
+
+ **Record TXT (Text):**
+   - **Descrizione:** Contiene testo libero o informazioni strutturate. Utilizzato per scopi vari, tra cui la verifica di proprietà dei domini e la fornitura di informazioni sul dominio.
+   - **Esempio:** `example.com IN TXT "Questo è un record TXT di esempio"`
+
+
+Il record SOA (Start of Authority) è uno dei record DNS (Domain Name System) fondamentali e svolge un ruolo chiave nella gestione di una zona DNS. Una zona DNS rappresenta una parte gerarchica dello spazio dei nomi del DNS, ed è gestita da un singolo server DNS autoritativo. Il record SOA fornisce informazioni essenziali su questa zona. in dettaglio record SOA:
+
+Il record SOA è essenziale per la corretta gestione delle zone DNS, garantendo la sincronizzazione tra i server DNS primari e secondari e fornendo informazioni critiche sulla configurazione e l'autorità della zona.
+
+
+**Struttura del Record SOA:**
+```
+example.com IN SOA ns1.example.com admin.example.com (
+                2022021001 ; Numero di serie
+                86400      ; Intervallo di riflessione (Refresh)
+                7200       ; Ritardo di ritrasmissione (Retry)
+                3600000    ; Tempo massimo di scadenza (Expire)
+                86400 )    ; Tempo minimo di TTL (Time to Live)
+```
+
+**Descrizione dei campi:**
+
+1. **Nome del dominio principale (example.com):**
+   - Indica la zona del dominio principale associata a questo record SOA.
+
+2. **Nome del server primario (ns1.example.com):**
+   - Specifica il server di nomi primario autoritativo per la zona. Questo è il server che contiene l'autorità finale sulla zona e ha il controllo principale sulla gestione delle informazioni DNS per quella zona.
+
+3. **Indirizzo email dell'amministratore (admin.example.com):**
+   - Indica l'indirizzo email dell'amministratore responsabile della zona. Nella rappresentazione del record SOA, l'indirizzo email è invertito e il punto è sostituito da un punto e virgola.
+
+4. **Numero di serie (2022021001):**
+   - Rappresenta il numero di versione della zona. Questo numero dovrebbe essere incrementato ogni volta che vengono apportate modifiche alla zona. Aiuta a garantire che i server DNS in giro per il mondo siano consapevoli delle nuove informazioni.
+
+5. **Intervallo di riflessione (Refresh):**
+   - Indica il periodo di tempo in secondi dopo il quale un server DNS secondario dovrebbe verificare se il record SOA è cambiato. In caso di modifiche, il server secondario inizierà il processo di trasferimento di zona.
+
+6. **Ritardo di ritrasmissione (Retry):**
+   - Specifica il tempo in secondi che un server secondario dovrebbe attendere prima di tentare di riconnettersi al server primario nel caso di un fallimento di trasferimento di zona.
+
+7. **Tempo massimo di scadenza (Expire):**
+   - Indica il periodo di tempo massimo in secondi durante il quale un server secondario può utilizzare le informazioni DNS se non riesce a comunicare con il server primario. Dopo questo periodo, il server secondario non risponderà più alle query per quella zona.
+
+8. **Tempo minimo di TTL (Time to Live):**
+   - Specifica il valore minimo di TTL per tutti gli altri record nella zona. Il TTL è il periodo di tempo per cui un record può essere mantenuto nella cache di un client DNS prima che debba essere nuovamente verificato.
+
+
+
+
