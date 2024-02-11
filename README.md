@@ -1249,11 +1249,30 @@ tcpdump –vvAls | grep ‘Set-Cookie|Host|Cookie:’
 
 _____________________________________________________________________________________________________________
 
+### Wireshark
+
+Wireshark è un popolare analizzatore di protocolli di rete open-source. Questo strumento consente di catturare e analizzare il traffico di rete in tempo reale. Wireshark supporta una vasta gamma di protocolli di rete ed è disponibile per diverse piattaforme, inclusi Windows, Linux e macOS.
+
+Cosa posso fare con Wireshark:
+
+**Cattura dei pacchetti:** Wireshark permette di catturare pacchetti di dati in tempo reale da una interfaccia di rete specifica.
+
+**Filtraggio avanzato:** Offre potenti opzioni di filtraggio per visualizzare solo i pacchetti di interesse. I filtri possono essere applicati in base a criteri come indirizzi IP, protocolli, porte e altro ancora.
+
+**Analisi di protocollo:** Wireshark decodifica automaticamente numerosi protocolli di rete e visualizza chiaramente le informazioni contenute nei pacchetti. Può mostrare i dettagli dei protocolli di livello applicativo come HTTP, DNS, TCP, UDP e molti altri.
+
+**Analisi dei flussi:** Wireshark offre funzionalità per seguire i flussi di comunicazione tra gli host, facilitando la comprensione delle interazioni complesse tra i dispositivi di rete.
+
+**Colorazione dei pacchetti:** I pacchetti vengono colorati in base ai criteri definiti, rendendo più facile identificare e distinguere diversi tipi di pacchetti.
+
+**Esportazione dei dati:** È possibile esportare i dati catturati in vari formati, come file di tipo CSV o JSON, per ulteriori analisi.
+
+**Supporto per diversi formati di cattura:** Wireshark supporta una vasta gamma di formati di file di cattura, inclusi quelli generati da altre utilità come tcpdump.
 
 
 
 
-
+<img width="487" alt="Screenshot 2024-02-11 alle 10 47 11" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/e5ba32ae-9071-4d37-a4bb-4355fdf178bc">
 
 
 
