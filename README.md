@@ -1662,8 +1662,9 @@ Il DNS è stato progettato per tradurre un nome di dominio - qualcosa che le per
    ```
 
 
+I nomi di dominio devono essere registrati presso l'ICANN (Internet Corporation for Assigned Names and Numbers), di solito tramite un intermediario come VeriSign o GoDaddy. I domini di primo livello (TLD) comprendono .com, .edu, .org e molti altri che di solito si vedono alla fine di un nome di dominio completamente qualificato (FQDN).
 
-
+<img width="549" alt="Screenshot 2024-02-11 alle 13 27 08" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/88be685d-abdf-43c5-afd8-42760de97f14">
 
 
 
