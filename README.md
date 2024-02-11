@@ -1596,10 +1596,70 @@ sudo netdiscover -h
 
 
 
+<img width="625" alt="Screenshot 2024-02-11 alle 13 16 42" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/64ff2e01-4db9-4fae-b776-cd15e337757f">
+
+
+
+_____________________________________________________________
+
+# Domain Name Service (DNS)
+
+
+Il Domain Name System o DNS è uno dei protocolli di rete che fanno girare il mondo. Senza di esso, dovremmo ricordare innumerevoli indirizzi IP solo per navigare verso i nostri siti web preferiti. Immaginate di dover ricordare gli indirizzi IPv4 (32 bit) di Facebook, Amazon e Hackers-Arise, solo per visitare ciascuno di questi siti web di importanza critica (il che è peggiorato dagli indirizzi IPv6 a 128 bit).
+Il DNS è stato progettato per tradurre un nome di dominio - qualcosa che le persone sono piuttosto brave a ricordare - in un indirizzo IP, il linguaggio del routing di Internet. Il DNS è semplicemente la traduzione di un nome di dominio nei rispettivi indirizzi IP.
 
 
 
 
+**comandi utili**
+
+
+
+**`dig` (Domain Information Groper):**
+   `dig` è un potente strumento di interrogazione DNS che consente di ottenere informazioni dettagliate sui record DNS. Può essere utilizzato per ottenere informazioni come gli indirizzi IP associati a un nome di dominio, i record MX (Mail Exchange), i record TXT, ecc.
+
+   ```bash
+   dig example.com
+   ```
+
+**`nslookup` (Name Server Lookup):**
+   `nslookup` è un comando diagnostico che consente di eseguire interrogazioni DNS e ottenere informazioni sui server DNS. Tuttavia, questo comando è stato sostituito da `dig` e potrebbe non essere presente in tutte le distribuzioni.
+
+   ```bash
+   nslookup example.com
+   ```
+
+**`host`:**
+   `host` è un comando che fornisce informazioni DNS di base, come l'indirizzo IP associato a un nome di dominio.
+
+   ```bash
+   host example.com
+   ```
+
+**`hostname`:**
+   `hostname` restituisce il nome host associato all'indirizzo IP del sistema locale. Può anche essere utilizzato con l'opzione `-i` per ottenere direttamente l'indirizzo IP.
+
+   ```bash
+   hostname
+   ```
+
+   ```bash
+   hostname -i
+   ```
+
+**`whois`:**
+   `whois` non è specificamente un comando DNS, ma può essere utilizzato per ottenere informazioni sul proprietario di un dominio e dettagli associati.
+
+   ```bash
+   whois example.com
+   ```
+
+**`nmcli` (NetworkManager Command-Line Interface):**
+   Se stai utilizzando NetworkManager, `nmcli` può essere utilizzato per visualizzare informazioni sulla connessione di rete corrente, inclusi i server DNS.
+
+   ```bash
+   nmcli dev show | grep DNS
+   ```
 
 
 
