@@ -1484,24 +1484,115 @@ ____________________________________________________
 
 
 
+Il Protocollo di Risoluzione degli Indirizzi (ARP - Address Resolution Protocol) è un protocollo di rete utilizzato per associare un indirizzo IP a un indirizzo MAC (Media Access Control) su una rete locale.
+Il suo scopo principale è tradurre gli indirizzi di rete livello 3 (come gli indirizzi IP) negli indirizzi fisici a livello 2 (come gli indirizzi MAC).
+
+**Quando è utilizzato ?**
+
+È utilizzato nella fase di inizializzazione della comunicazione tra dispositivi sulla stessa rete locale, garantendo che i pacchetti possano essere correttamente instradati a livello di collegamento dati.
+
+**Caching**
+La cache ARP è temporanea e può essere aggiornata o cancellata nel tempo. Ad esempio, quando i dispositivi si spengono o vengono disconnessi dalla rete, le voci corrispondenti nella cache ARP possono essere eliminate.
+
+**COME FUNZIONA ?**
+
+Richiesta ARP (ARP Request):
+Quando un dispositivo sulla rete desidera inviare un pacchetto a un altro dispositivo, ma conosce solo il suo indirizzo IP, invia una richiesta ARP broadcast. Questa richiesta contiene l'indirizzo IP del dispositivo di destinazione e chiede quale sia il suo indirizzo MAC. La richiesta è inviata a tutti i dispositivi sulla stessa rete locale.
+
+Risposta ARP (ARP Reply):
+Il dispositivo di destinazione, che riconosce il proprio indirizzo IP nella richiesta ARP, risponde inviando un pacchetto ARP contenente il suo indirizzo MAC. Questa risposta è inviata direttamente al dispositivo che ha iniziato la richiesta ARP.
+
+Memorizzazione nella Cache ARP:
+I dispositivi coinvolti memorizzano le informazioni ottenute nel processo ARP in una tabella nota come "cache ARP" o "tabella ARP". Questa tabella tiene traccia delle associazioni tra indirizzi IP e indirizzi MAC per ridurre la necessità di nuove richieste ARP per lo stesso dispositivo sulla rete.
+
+
+**APPROFONDIMENTO SU CACHE ARP**
+
+La cache ARP, anche conosciuta come "tabella ARP", è una memoria temporanea che contiene le associazioni tra gli indirizzi IP e gli indirizzi MAC sulla rete locale di un dispositivo. La posizione specifica della cache ARP può variare a seconda del sistema operativo.
+
+
+**Sistemi operativi basati su Linux:**
+   - Su sistemi Linux, la cache ARP è memorizzata nel kernel e può essere visualizzata utilizzando il comando `arp`.
+   - La posizione del file che memorizza le informazioni sulla cache ARP varia tra le distribuzioni Linux. In molte distribuzioni, queste informazioni sono temporanee e gestite direttamente dal kernel.
+
+**Sistemi operativi basati su Windows:**
+   - Su sistemi Windows, la cache ARP è memorizzata nel Registro di sistema e può essere visualizzata utilizzando il comando `arp`.
+   - La cache ARP su Windows è anche temporanea e viene gestita dal sistema operativo.
+
+**Sistemi operativi basati su macOS:**
+   - Su macOS (precedentemente noto come OS X), la cache ARP è gestita dal kernel.
+   - Può essere visualizzata utilizzando il comando `arp` in un terminale.
+
+COMANDI  per visualizzare la cache ARP su Linux, Windows e macOS:
 
 
 
+**Linux:**
+  ```bash
+  arp -n
+  arp -v 
+  ```
+
+**Windows:**
+  ```bash
+  arp -a
+  ```
+
+**macOS:**
+  ```bash
+  arp -a
+  ```
+
+le voci nella cache ARP sono temporanee e possono essere sovrascritte o rimosse nel tempo.
+Inoltre, la cache ARP è specifica per ogni dispositivo e non è condivisa tra i dispositivi nella rete.
+
+
+**VULNS**
+
+
+Il Protocollo di Risoluzione degli Indirizzi (ARP) è vulnerabile ad alcuni tipi di attacchi, spesso noti come attacchi ARP spoofing o attacchi di avvelenamento ARP. Questi attacchi sfruttano la natura trust-based e non autenticata del protocollo ARP. Alcuni degli attacchi ARP più comuni includono:
+
+**ARP Spoofing (ARP Poisoning):**
+   In questo attacco, un attaccante invia pacchetti ARP falsificati alla rete, affermando di possedere l'indirizzo IP di un altro dispositivo (come il gateway predefinito). Questo può portare a un'inversione delle associazioni ARP nella cache degli altri dispositivi, facendo sì che inviino il traffico destinato a quell'indirizzo IP al dispositivo compromesso.
+
+**ARP Cache Poisoning:**
+   Simile all'ARP spoofing, l'ARP cache poisoning coinvolge la manipolazione delle informazioni nella cache ARP di un dispositivo. Gli attaccanti inviano pacchetti ARP falsificati per aggiornare la cache ARP di un dispositivo con informazioni errate.
+
+**Man-in-the-Middle (MITM) con ARP:**
+   In un attacco MITM, un attaccante può sfruttare il protocollo ARP per intercettare e manipolare il traffico tra due dispositivi sulla rete. Ciò può consentire all'attaccante di monitorare o modificare i dati in transito.
+
+**ARP Request Flooding:**
+   Gli attaccanti possono inundare la rete con numerose richieste ARP false, sovraccaricando la cache ARP dei dispositivi e causando rallentamenti o interruzioni del traffico di rete.
+
+
+CONTROMISURE POSSIBILI :
+
+- **Static ARP Entries:** Configurare voci ARP statiche nelle cache ARP dei dispositivi, in modo che le associazioni siano meno suscettibili a essere sovrascritte.
+
+- **ARP Inspection:** Alcuni switch supportano la funzionalità di ARP inspection, che può rilevare e mitigare attacchi ARP spoofing.
+
+- **VPN e Tunneling:** Utilizzare reti private virtuali (VPN) o tunneling per proteggere il traffico da attacchi MITM sulla rete locale.
+
+- **Monitoraggio del Traffico ARP:** Monitorare attentamente il traffico ARP e rilevare anomalie o modelli sospetti che potrebbero indicare attività fraudolenta.
 
 
 
+**ESERCITAZIONE**
 
 
+Il protocollo ARP non prevede l'autenticazione, quindi l'hacker può facilmente utilizzare questa "funzione" per scoprire tutti i sistemi di una rete. Ciò può essere utile quando si cerca di violare un altro sistema sulla rete locale (LAN) o quando si compromette un singolo utente sulla rete e si vuole passare a un obiettivo più prezioso sulla rete, come un server di database.
+Esistono numerosi strumenti che l'hacker può utilizzare per scoprire i sistemi sulla rete. Questi strumenti inviano una richiesta ARP  e i sistemi rispondono con il loro indirizzo IP e MAC. Per esempio, nel nostro sistema Kali, abbiamo netdiscover.
+Per visualizzare la schermata di aiuto di netdiscover, basta inserire;
+
+```
+sudo netdiscover -h
+```
 
 
+**ALCUNI TOOLS PER MAN-IN-THE-MIDDLE**
 
-
-
-
-
-
-
-
+> ARP SPOOF ( VEDI TUTORIAL )
+> DRIFNET ( VEDI TUTORIAL )
 
 
 
