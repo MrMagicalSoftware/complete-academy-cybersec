@@ -2034,4 +2034,7 @@ msf5> exploit
 ```
 
 
+ <img width="563" alt="Screenshot 2024-02-14 alle 10 50 17" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/5874c89b-1cdc-4e9d-86b5-a84bddf072c0">
+
+
 
