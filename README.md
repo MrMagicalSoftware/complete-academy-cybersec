@@ -1822,10 +1822,116 @@ example.com IN SOA ns1.example.com admin.example.com (
 ______________________________________________________________________________
 
 **dns spoofing**
+
+
 https://www.hackers-arise.com/post/2017/05/23/Hacking-DNS-to-Re-Direct-Anyone-on-your-LAN-to-your-Website
 
 
 ____________________
+
+**Sicurezza DNS o DNSSec**
+
+Il DNS, per impostazione predefinita, NON è sicuro. Il DNS può essere facilmente spoofato a causa del fatto che si basa su UDP, che non è orientato alla connessione. Il DNSSEC, o DNS Security Extensions, è stato sviluppato per rafforzare l'autenticazione nel DNS utilizzando le firme digitali.
+Ogni zona DNS ha una chiave pubblica/privata. Ogni resolver ricorsivo che cerca dati nella zona recupera anche la chiave pubblica della zona, che può essere utilizzata per convalidare l'autenticità dei dati.
+Prima di DNSSec, era possibile per i malintenzionati eseguire trasferimenti di zone sui server DNS. Questo avrebbe avvelenato i dati rendendoli inaffidabili. Il protocollo DNSSEC impedisce che ciò avvenga;
+1. Verificando crittograficamente che i dati ricevuti provengano effettivamente dalla zona che ritiene debba provenire;
+2. Assicurando l'integrità dei dati, in modo che non possano essere alterati durante il percorso, poiché i dati devono essere firmati digitalmente dalla chiave privata della zona.
+
+
+**COME INSTLLARE DNS**
+
+
+BIND è il server DNS più usato su Internet, specialmente sui sistemi Unix e derivati, sui quali è lo standard di fatto.
+
+
+```
+apt-get install bind9
+```
+
+
+se non si trova nella repository 
+
+```
+git clone https://gitlab.isc.org/isc-projects/bind9.git
+```
+
+
+Apriamo ora il file di configurazione
+
+
+```
+leafpad /etc/bind/named.conf.options
+```
+
+
+Per avviare il servizio :
+
+```
+service bind9 restart
+```
+
+_________________________________________
+
+
+# PROTOCOLLO SMB 
+
+
+
+Il protocollo SMB, acronimo di Server Message Block, è un protocollo di rete utilizzato per la condivisione di risorse e file all'interno di una rete locale. Originariamente sviluppato da IBM negli anni '80, è diventato uno standard de facto per la condivisione di file su reti Microsoft Windows.
+
+
+
+
+SMB E' TCP/IP E USA LA PORTA 445 
+
+
+![Screenshot 2024-02-14 alle 10 07 44](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/63aebfb2-da1a-431e-96c8-d6daa00f4975)
+
+
+
+
+Ecco una spiegazione di base del funzionamento del protocollo SMB:
+
+1. **Richiesta di Connessione:** Quando un client desidera accedere a una risorsa (come una cartella o un file) su un server, stabilisce una connessione con il server utilizzando il protocollo SMB.
+
+2. **Autenticazione:** Dopo la connessione, il client deve autenticarsi presso il server per ottenere l'accesso alle risorse condivise. L'autenticazione può richiedere un nome utente e una password, o può utilizzare altri meccanismi di sicurezza come Kerberos.
+
+3. **Comunicazione di Comandi e Risposte:** Una volta autenticato, il client può inviare comandi SMB al server per eseguire varie operazioni, come la lettura o la scrittura di file, la creazione di directory o la richiesta di informazioni sulle risorse condivise.
+
+4. **Operazioni di File e Directory:** Il protocollo SMB supporta operazioni comuni su file e directory, come apertura, chiusura, lettura, scrittura e eliminazione. Le operazioni SMB possono anche includere la gestione dei permessi di accesso e altre informazioni di controllo.
+
+5. **Chiusura della Connessione:** Dopo aver completato le operazioni richieste, il client può chiudere la connessione con il server.
+
+6. **Versioni del Protocollo:** Nel corso degli anni, sono state sviluppate diverse versioni del protocollo SMB. Versioni più recenti, come SMBv2 e SMBv3, introducono miglioramenti in termini di prestazioni e sicurezza rispetto alle versioni precedenti.
+
+7. **Sicurezza:** Il protocollo SMB può operare su reti sicure utilizzando diverse modalità di sicurezza, tra cui la crittografia dei dati tramite il protocollo SSL/TLS o tramite il protocollo di sicurezza NTLM.
+
+
+
+
+**Pericoli dell’uso di SMB**
+
+Nonostante la crittografia end-to-end, i protocolli SMB sono un bersaglio degli hacker. Per accedere a una rete o un server protetto con SMB, un hacker può provare le seguenti strategie:
+
+Attacco di forza bruta. È il metodo più comunemente utilizzato contro i protocolli SMB, in quanto con un po’ di tempo a disposizione è in grado di bucare l’autenticazione tramite username e password.
+Attacchi man in the middle. Un hacker può provare a inserire del codice malevolo su un sistema per intercettare e alterare le comunicazioni tra server e client.
+Attacchi di overflow del buffer. Un cybercriminale può provare a esaurire la memoria disponibile per causare crash e malfunzionamenti dei server, al fine di rendere le reti più vulnerabili.
+Attacchi ransomware. L’obiettivo di un attacco contro il protocollo SMB di un server è spesso quello di eseguire un ransomware e rubare o cancellare le share ospitate.
+Attacchi con codice da remoto. In modo simile agli attacchi man in the middle, è possibile iniettare del codice dannoso controllato da remoto per accedere a un nodo della rete.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
