@@ -2036,5 +2036,97 @@ msf5> exploit
 
  <img width="563" alt="Screenshot 2024-02-14 alle 10 50 17" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/5874c89b-1cdc-4e9d-86b5-a84bddf072c0">
 
+____________________
+
+
+
+# Simple Network Management Protocol (SNMP)
+
+
+
+SNMP, acronimo di Simple Network Management Protocol, è un protocollo di rete utilizzato per gestire e monitorare dispositivi di rete, come router, switch, server e altri dispositivi di rete. SNMP consente agli amministratori di rete di raccogliere informazioni sulla prestazione e lo stato di dispositivi di rete, nonché di configurare e controllare tali dispositivi da remoto.
+
+
+If an attacker can breach the SNMP, they may be able to unmask your encrypted VPN communication ( ARTICOLO NSA'S EXTRABACON EXPLOIT )
+as well as see and possibly control every device connected to your network.
+
+the Simple Network Management Protocol uses UDP ports 161 and 162 to manage network devices. 
+
+Network devices use this protocol to communicate with each other and can be used by administrators to manage the devices. As hackers, if we can access the SNMP protocol, we can harvest a vast resource of information on the target's network and even disable and change the settings on these devices. Imagine the havoc one could wreak by changing the settings on routers and switches
+
+
+
+
+![Screenshot 2024-02-14 alle 12 06 34](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/a1d16b6b-5198-47f0-9255-bc54a4e3a5dd)
+
+
+
+
+1. **Agenti e Gestori:** SNMP opera su una relazione client-server. I dispositivi di rete, chiamati agenti, ospitano il software SNMP che fornisce informazioni sullo stato del dispositivo. I gestori SNMP sono le applicazioni o i sistemi che raccolgono e analizzano queste informazioni.
+
+2. **MIB (Management Information Base):** La MIB è una struttura di dati gerarchica che organizza le informazioni gestite da SNMP. Contiene oggetti gestiti, ciascuno identificato da un OID (Object Identifier), che rappresenta un aspetto specifico di un dispositivo (ad esempio, stato di interfaccia, utilizzo della CPU, ecc.).
+
+3. **SNMP Versioni:** Ci sono diverse versioni di SNMP, tra cui SNMPv1, SNMPv2c e SNMPv3. Le versioni più recenti, come SNMPv2c e SNMPv3, introducono miglioramenti in termini di sicurezza e funzionalità rispetto a SNMPv1.
+
+4. **Comandi SNMP:** SNMP utilizza comandi per interagire tra agenti e gestori. I comandi principali sono:
+   - **GET:** Utilizzato dai gestori per richiedere informazioni specifiche a un agente.
+   - **GETNEXT:** Simile a GET, ma restituisce l'oggetto successivo nella sequenza della MIB.
+   - **SET:** Utilizzato dai gestori per configurare o modificare i valori degli oggetti nel dispositivo.
+   - **TRAP:** Gli agenti inviano trap ai gestori per notificarli di eventi importanti, come un errore o un cambiamento di stato.
+
+5. **Comunità SNMP:** Le comunità SNMP sono stringhe di testo utilizzate come password per autenticare gli agenti e consentire l'accesso alle informazioni. Le comunità possono essere definite come "lettura" o "scrittura" per controllare i privilegi di accesso.
+
+6. **SNMPv3 Security:** SNMPv3 ha introdotto caratteristiche di sicurezza avanzate, inclusi meccanismi di autenticazione e crittografia per proteggere la trasmissione di informazioni tra agenti e gestori.
+
+
+
+**SNMP Versions**
+
+SNMP has three (3) versions. Version 1, or SNMPv1, has very poor security. The authentication of clients is in cleartext and, by default, uses a "community string" that is set to "public." This community string operates like a password, and it is valid for each and every node on the network. The authentication of the manager is also a community string set to "private" by default. With these community strings, the attacker can gather all the information from the MIB (with the public community string) and even set the configuration on the devices (with the private community string). Although it is widely known and understood that SNMPv1 is insecure, it remains in wide use (I recently did a security assessment at a major NYC bank, and they were still using SNMPv1). Even if the network administrator changes the community string from the defaults, because communication is in cleartext, an attacker can sniff the authentication strings off the wire.
+SNMPv2 improved upon SNMPv1 in terms of performance and security, but because it was not backwardly compatible with SNMPv1, it was not widely adopted. SNMPv3 is significantly more secure than either SNMPv1 or v2. SNMPv3 adds encryption, message integrity, and authentication but is still not used on all networks.
+
+
+**Abusing SNMP for Information Gathering**
+
+
+Open Kali and go to Applications --> Kali Linux -->Information Gathering --> SNMP Analysis -->snmpcheck, as in the screenshot below.
+
+<img width="515" alt="Screenshot 2024-02-14 alle 12 15 11" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/7756e327-1143-4feb-b97c-8f941c4f9895">
+
+
+```
+kali > snmpcheck -t <target IP>
+```
+
+**Cracking SNMP community strings**
+As you saw in the previous exercise, SNMP can provide us with a significant amount of information about our target if we can access it. In the previous section, we assumed that the admin had left the community string set to "public." What if the admin was a bit more cautious and security-minded and had changed the community string? How can we find the community string?
+There is an excellent tool built into Kali named onesixtyone (presumably named after the default port that SNMP operates on). In essence, it is a SNMP community string cracker. Like most "password" crackers, it relies upon a dictionary or wordlist to try against the service until it finds a match.
+Let's open onesixtyone by going to Applications --> Kali Linux --> Information Gathering -- >SNMP Analysis -->onesixtyone. It should open a help screen like below.
+
+
+<img width="576" alt="Screenshot 2024-02-14 alle 12 19 28" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/413d01c8-f043-46c3-af55-6ecba07e3607">
+
+
+
+The syntax of onesixtyone is pretty simple and straightforward.
+
+```
+onesixtyone [options] <host IP> <community string private or public>
+```
+
+Like a dictionary-based password cracker, the dictionary you use with onesixtyone is critical. In the case of onesixtyone, it has a built-in dictionary. It's small but contains many of the commonly used strings with SNMP. If you are creating your own dictionary for SNMP cracking, this is a good starting point, but you may want to expand it with variations of the domain name or company name as network administrators don't usually put much effort into creating complex strings for SNMP. For instance, if the company is Microsoft, you might try strings that a lazy admin might use, such as microsoft-public, microsoft-private, microsoft-snmp, microsoft- network, etc.
+Let's take a look at the dictionary file by typing;
+kali > cat /usr/share/doc/onesixtone/dict.txt
+
+```
+onesixtyone 192.168.1.102 -c /usr/share/doc/onesixtyone/dict.txt
+```
+
+NSA Exploits SNMP to Unmask VPN Communications
+We know that the NSA has exploited SNMP to unmask VPN communications from documents released by Edward Snowden. For a tutorial on this NSA ExtraBacon exploit, click here. Although this vulnerability has been patched by Cisco, it is likely that the NSA still has another exploit of SNMP to view encrypted communication.
+
+
+_________________
+
 
 
