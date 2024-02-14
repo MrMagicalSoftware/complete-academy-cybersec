@@ -1922,6 +1922,72 @@ Attacchi con codice da remoto. In modo simile agli attacchi man in the middle, �
 
 
 
+**CIFS**
+
+The term CIFS and SMB are often confused by the novice and cyber security professional alike. CIFS stands for “Common Internet File System.” CIFS is a dialect or a form of SMB. That is, CIFS is a particular implementation of the Server Message Block protocol. It was developed by Microsoft to be used on early Microsoft operating systems.
+CIFS is now generally considered obsolete as it has been supplanted by more modern implementations of SMB, including SMB 2.0 (introduced in 2006 with Windows Vista) and SMB 3.0 (introduced with Windows 8 and Server 2012).
+
+
+**SMB VULNERABILITIES**
+
+
+SMB in Windows and Samba in Linux/Unix systems (see below) has been a major source of critical vulnerabilities on both these operating systems in the past and will likely continue to be a source of critical vulnerabilities in the future.
+Two of the most critical Windows vulnerabilities over the last decade or so have been SMB vulnerabilities. These include MS08-067 and, more recently, the EternalBlue exploit developed by the NSA. In both cases, these exploits enabled the attacker to send specially crafted packets to SMB and execute remote code with system privileges on the target system. In other words, armed with these exploits, the attacker could take over any system and control everything on it.
+
+https://www.rapid7.com/blog/post/2014/02/03/new-ms08-067/
+
+
+```
+nmap -p 445 -script smb-check-vulns <IP Address>
+nmap -p 445 -script smb-check-vulns -script-args=unsafe=1 <IP Address>
+msfcli auxiliary/scanner/smb/ms08_067_check rhosts=<IP Range> threads=100 E
+msf> search type:exploit smb
+```
+
+
+![Screenshot 2024-02-14 alle 10 17 31](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/4eaa68e4-6dc0-4175-80dd-9829c09046d5)
+
+
+![Screenshot 2024-02-14 alle 10 17 41](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/ef62ea85-1b5a-4ba7-9a6f-d6eb4174f58b)
+
+
+**COME INSTLLARE SAMBA**
+
+
+```
+apt-get install samba
+service smbd start
+leafpad /etc/samba/smb.conf
+```
+
+
+file di configurazione :
+
+
+<img width="561" alt="Screenshot 2024-02-14 alle 10 22 30" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/f037a350-6b47-4d3e-96fa-421210493817">
+
+naming our share [example];
+providing a comment to explain comment = Samba on ;
+provide a path to our share path = /home/OTW/my_share;
+determine whether the share is read only read only = no;
+determine whether the share is browsable browsable = yes.
+
+
+ora mi creo la directory :
+```
+mkdir /home/OTW/my_share
+chmod 777 /home/OTW/my_share
+service smbd restart
+
+```
+
+
+With the share created from any Windows machine on the network, you can access that share by simply navigating via File Explorer to the share by entering the IP address and the name of the share, such as;
+\\192.168.1.101\my_share
+
+
+_____________________________________________________________________
+
 
 
 
