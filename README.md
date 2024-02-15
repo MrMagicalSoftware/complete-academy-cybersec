@@ -2256,6 +2256,33 @@ When the user makes a subsequent request to the server, the cookie is added to t
 
 
 
+Cookies are used to identify the user of the server and other key information about the server. These cookies are usually a name/value pair and do not contain a space.
+
+
+
+**status code http**
+
+![Screenshot 2024-02-15 alle 10 03 10](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/b108e1a0-2d34-46a0-a748-f9cccbe7dc4c)
+
+
+
+**HTTPS**
+The HTTP protocol is transmitted in plain TCP, which means it is unencrypted and susceptible to MitM attacks and other such attacks by an attacker positioned between the client and server. HTTPS is essentially the same as HTTP but instead is tunneled using Secure Sockets Layer (SSL). In this way, the confidentiality and integrity of the data are protected.
+
+
+
+**HTTP Proxies**
+An HTTP proxy is a server between the client's browser and the web server. When the client’s browser is configured to use the HTTP proxy, all requests to the Internet must go first to the proxy. The proxy then forwards the request and receives the response before forwarding it to the client. In this way, the HTTP proxy can provide access control, caching, authentication, and content filtering.
+
+
+![Screenshot 2024-02-15 alle 10 07 02](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/56540ef7-5a30-4271-a346-133256c6cd07)
+
+
+**burp suite**
+https://www.hackers-arise.com/post/2016/12/05/web-app-hacking-hacking-form-authentication-with-burp-suite
+
+
+
 
 
 
