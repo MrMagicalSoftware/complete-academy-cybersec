@@ -2149,7 +2149,6 @@ All HTTP messages contain the same basic elements;
 ![Screenshot 2024-02-15 alle 09 40 30](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/07bf9dba-0bfb-4e71-8294-c9797aa5c1d3)
 
 
-![Screenshot 2024-02-15 alle 09 41 05](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/e29f3c91-5adc-4f44-aff4-85c14e61e465)
 
 
 The first line of the HTTP requests has three elements, separated by spaces
@@ -2167,6 +2166,94 @@ The typical HTTP response consists of three items;
 1. The HTTP version
 2. The numeric status code (see status codes below).
 3. 3. The text describing the status response.
+
+
+![Screenshot 2024-02-15 alle 09 41 05](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/e29f3c91-5adc-4f44-aff4-85c14e61e465)
+
+
+
+**HTTP Methods**
+
+1. **GET**: Il metodo GET viene utilizzato per richiedere dati da una risorsa specificata. Le richieste GET dovrebbero essere sicure e non dovrebbero modificare lo stato del server.
+
+2. **POST**: Il metodo POST viene utilizzato per inviare dati al server per essere elaborati. Può essere utilizzato per inviare dati di form, caricare file, ecc. Le richieste POST possono modificare lo stato del server.
+
+3. **PUT**: Il metodo PUT viene utilizzato per aggiornare una risorsa esistente o creare una nuova risorsa se non esiste già.
+
+4. **DELETE**: Il metodo DELETE viene utilizzato per rimuovere una risorsa specificata dal server.
+
+5. **PATCH**: Il metodo PATCH è utilizzato per applicare modifiche parziali a una risorsa.
+
+6. **HEAD**: Il metodo HEAD è simile a GET, ma il server risponde solo con gli header e senza il corpo della risorsa. È spesso utilizzato per ottenere informazioni sull'intestazione senza recuperare l'intera risorsa.
+
+7. **OPTIONS**: Il metodo OPTIONS viene utilizzato per richiedere informazioni sulle opzioni di comunicazione disponibili per una risorsa o il server.
+
+8. **TRACE**: Il metodo TRACE consente a un cliente di vedere quali modifiche sono state apportate lungo la catena di trasmissione del messaggio HTTP.
+
+9. **CONNECT**: Il metodo CONNECT viene utilizzato per richiedere una connessione tunnel al server, spesso utilizzato per stabilire una connessione sicura attraverso un proxy.
+
+
+The basic syntax of the URL is:
+
+```
+protocol://hostname[:port]/ [/path/] file [?param=value]
+```
+
+The port number is optional and only necessary if the port is different from the default port used by the protocol specified in the first field (http=80, https=443, ftp=21, etc.).
+
+
+
+**http headers**
+
+
+
+There are numerous types of HEADERS in HTTP. Some can be used for both requests and responses, and others are specific to the message types.
+These are some of the common header types;
+
+General Headers
+
+* Connection - tells the other end whether the connection should closed after HTTP transmission * Content-Encoding - specifies the type of encoding
+* Content-Length - specifies the content length
+* Content-Type - specifies the content type
+* Transfer-Encoding - specifies the encoding on the message body
+
+Request Headers
+
+* Accept - specifies to the server what type of content it will accept
+* Accept-Encoding - specifies to the server what type of message encoding it will accept * Authorization - submits credentials
+* Cookie - submits cookies to the server
+* Host - specifies the host name
+* If-Modified-Since - specifies WHEN the browser last received the resource. If not modified, the server instructs the client to use the cached copy
+* If-None-Match - specifies entity tag
+* Origin - specifies the domain where the request originated
+* Referrer - specifies the URL of the requestor
+* User-Agent - specifies the browser that generated the request
+
+Response Headers
+
+* Access-Control-Allow-Origin - specifies whether the resource can be retrieved via cross- domain
+* Cache-Control - passes caching directive to the browse
+* Etag - specifies an entity tag (notifies the server of the version in the cache)
+* Expires - specifies how long the contents of the message body are valid
+* Location - used in redirect responses (3xx)
+* Pragma - passes caching directives to the browser
+* Server - specifies the web server software
+* Set-Cookie - issues cookies
+* WWW-Authenticate - provides details of the type of authentication supported
+* X-Frame-Options - whether and how the response may be loaded within the browser frame
+
+
+
+Cookies
+
+Cookies are a critical part of HTTP. Cookies enable the server to send items of data to the client, and the client stores this data and resubmits it to the server the next time a request is made to the server.
+The server issues a cookie to the client using the SET-COOKIE response header.
+SetCookie: Tracking=wdr66gyU34pli89
+When the user makes a subsequent request to the server, the cookie is added to the header.
+
+
+<img width="916" alt="Screenshot 2024-02-15 alle 09 56 26" src="https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/843a4437-fd5b-47b0-9199-8785160e35e5">
+
 
 
 
