@@ -2164,7 +2164,9 @@ The first line of the HTTP requests has three elements, separated by spaces
 HTTP Responses
 The typical HTTP response consists of three items;
 
-
+1. The HTTP version
+2. The numeric status code (see status codes below).
+3. 3. The text describing the status response.
 
 
 
