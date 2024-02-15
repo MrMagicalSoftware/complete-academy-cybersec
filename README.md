@@ -2129,4 +2129,44 @@ We know that the NSA has exploited SNMP to unmask VPN communications from docume
 _________________
 
 
+# PROTOCOLLO HTTP 
+
+
+
+
+The HyperText Transfer Protocol, or HTTP, is the granddaddy of web technologies. It is the core communication protocol of the web, and all web applications use it. It's a simple protocol originally designed to retrieve static web pages. Over the years, it has been updated and extended to offer support to complex applications that are common today.
+HTTP uses a message-based model where the client sends a request, and the server responds with a response. It is connection-less but uses TCP as its transport mechanism.
+HTTP Requests
+
+All HTTP messages contain the same basic elements;
+
+1. One or more headers
+2. Then a blank line
+3. An optional Message Body
+
+
+
+![Screenshot 2024-02-15 alle 09 40 30](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/07bf9dba-0bfb-4e71-8294-c9797aa5c1d3)
+
+
+![Screenshot 2024-02-15 alle 09 41 05](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/e29f3c91-5adc-4f44-aff4-85c14e61e465)
+
+
+The first line of the HTTP requests has three elements, separated by spaces
+
+1. A verb (action word) indicating the HTTP method (see methods below). Among these, the most common is GET. The GET method retrieves a resource from the web server
+2. The requested URL
+3. The HTTP version used
+
+![Screenshot 2024-02-15 alle 09 45 52](https://github.com/MrMagicalSoftware/complete-academy-cybersec/assets/98833112/770eb34b-bd33-4d65-9201-473e7daab093)
+
+
+HTTP Responses
+The typical HTTP response consists of three items;
+
+
+
+
+
+
 
