@@ -1577,6 +1577,11 @@ CONTROMISURE POSSIBILI :
 
 
 
+```
+sudo macof -i eth0
+sudo apt-get install dsniff
+```
+
 **ESERCITAZIONE**
 
 
