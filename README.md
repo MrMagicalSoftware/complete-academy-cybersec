@@ -1588,10 +1588,10 @@ sudo macof -i eth0
 Install this : 
 
 ```
-sudo apt install libpcap0.8 libpcap0.8-dev && sudo apt purge arp-scan
-&& git clone https://github.com/royhills/arp-scan.git
+sudo apt install libpcap0.8 libpcap0.8-dev && sudo apt purge arp-scan && git clone https://github.com/royhills/arp-scan.git
 && cd arp-scan && autoreconf --install
-&& ./configure && make && make install
+&& ./configure && make  && sudo make install
+
 ```
 
 
