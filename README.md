@@ -1,5 +1,17 @@
 # complete-academy-cybersec
 
+
+# Apripre più terminali :
+
+CRTL + SHIFT + R  
+CRTL + SHIFT + E
+CRTL + SHIFT + D
+
+
+
+
+
+
 # Definizione di Networking
 
 Il networking, in termini informatici e tecnologici, si riferisce alla pratica di collegare tra loro dispositivi hardware (come computer, stampanti, server, switch, router e altri dispositivi) e software al fine di scambiare dati e condividere risorse all’interno di un sistema come una rete aziendale o su Internet stessa. Questa connessione può avvenire tramite cavi (rete cablata) o wireless (rete senza fili).
