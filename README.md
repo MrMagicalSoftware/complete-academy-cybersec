@@ -2317,6 +2317,9 @@ ___________________________________________________________
 
 
 
+# Mass scan
+
+
 ```
 
 sudo masscan 2.194.0.0/16 --rate 2000000 -p 80,8080 --open-only -oL risultati_subnet.txt && awk '{print "http://"$4 ":" $3}' risultati_subnet.txt > new_results.txt && cat new_results.txt | /home/kali/go/bin/httpx -fr -title -tech-detect -status-code
