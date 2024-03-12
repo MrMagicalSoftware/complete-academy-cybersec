@@ -2325,6 +2325,114 @@ sudo masscan 2.194.0.0/16 --rate 2000000 -p 80,8080 --open-only -oL risultati_su
 
 
 
+**redsocks**
+
+
+https://www.kali.org/tools/redsocks/
+
+
+Redsocks is a daemon running on the local system, that will transparently tunnel any TCP connection via a remote SOCKS4, SOCKS5 or HTTP proxy server. It uses the system firewall’s redirection facility to intercept TCP connections, thus the redirection is system-wide, with fine-grained control, and does not depend on LD_PRELOAD libraries.
+
+Redsocks supports tunneling TCP connections and UDP packets. It has authentication support for both, SOCKS and HTTP proxies.
+
+Also included is a small DNS server returning answers with the “truncated” flag set for any UDP query, forcing the resolver to use TCP.
+
+
+== REDSOCKS SOCKS5 TOR PROXY ==
+
+1) Install redsocks either through APT or build from source
+
+2) Edit the /etc/redsocks.conf and paste the following content:
+
+```
+base {
+        log_debug = on;
+        log_info = on;
+        log = "file:/var/log/redsocks.log";
+
+        daemon = on;
+
+        redirector = iptables;
+}
+
+redsocks {
+        local_ip = 0.0.0.0;
+        local_port = 12345;
+
+        ip = 127.0.0.1;
+        port = 9050;
+
+        type = socks5;
+
+        //login = "proxyUser";
+        //password = "proxyPassword";
+}
+
+redsocks {
+        local_ip = 0.0.0.0;
+        local_port = 12346;
+
+        ip = 127.0.0.1;
+        port = 9050;
+
+        type = socks5;
+
+        //login = "proxyUser";
+        //password = "proxyPassword";
+}
+```
+
+3) Save into a .sh file and execute this script
+
+```
+#!/bin/bash
+
+# Configura iptables para que todo el trafico local vaya directamente y el resto
+# siempre que tenga autorizacion (grupo socksified) vaya a internet a traves de redsocks
+
+# Create new chain
+iptables -t nat -N REDSOCKS
+
+# Ignore LANs and some other reserved addresses.
+# See http://en.wikipedia.org/wiki/Reserved_IP_addresses#Reserved_IPv4_addresses
+# and http://tools.ietf.org/html/rfc5735 for full list of reserved networks.
+iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 100.64.0.0/10 -j RETURN
+iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 198.18.0.0/15 -j RETURN
+iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+
+# Anything else should be redirected to port 12345
+#iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345 and 12346
+
+iptables -t nat -A REDSOCKS -p tcp --dport 80 -j REDIRECT --to-ports 12346
+iptables -t nat -A REDSOCKS -p tcp --dport 443 -j REDIRECT --to-ports 12345
+
+iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+
+# Any tcp connection made should be redirected to the REDSOCKS CHAIN.
+iptables -t nat -A OUTPUT -p tcp -j REDSOCKS
+```
+
+4) Run the service and have fun :)
+
+```
+sudo systemctl start redsocks / sudo service redsocks start
+sudo systemctl start tor / sudo service tor start
+```
+
+
+
+
+
+
+
+
 
 
 
