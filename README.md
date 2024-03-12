@@ -2429,6 +2429,53 @@ sudo systemctl start redsocks / sudo service redsocks start
 sudo systemctl start tor / sudo service tor start
 ```
 
+___________________________________________________________________
+
+
+
+
+1. **Raccolta di informazioni (Reconnaissance)**:
+   - **Footprinting**: Raccolta di informazioni pubbliche sul bersaglio, come indirizzi IP, nomi di dominio, e-mail e dati pubblicamente disponibili.
+   - **Scanning**: Identificazione delle risorse e delle vulnerabilità attraverso la scansione della rete.
+
+2. **Analisi delle vulnerabilità (Scanning)**:
+   - **Identificazione delle vulnerabilità**: Analisi delle potenziali debolezze nella sicurezza del sistema, dei servizi in esecuzione e delle configurazioni errate.
+
+3. **Ottenere l'accesso (Gaining Access)**:
+   - **Attacco**: Sfruttamento delle vulnerabilità identificate per guadagnare l'accesso non autorizzato al sistema o alla rete.
+
+4. **Mantenimento dell'accesso (Maintaining Access)**:
+   - **Creazione di backdoor**: Installazione di strumenti o tecniche che consentono all'attaccante di mantenere l'accesso senza essere rilevato.
+
+5. **Raccolta di informazioni ulteriori (Analysis)**:
+   - **Esplorazione**: Ricerca di ulteriori informazioni e privilegi all'interno del sistema compromesso.
+
+6. **Creazione di accesso nascosto (Covering Tracks)**:
+   - **Eliminazione di tracce**: Tentativo di nascondere la presenza dell'attaccante, eliminando eventuali tracce o log compromettenti.
+
+7. **Compromissione del sistema (Compromise)**:
+   - **Utilizzo dei privilegi ottenuti**: Sfruttamento dei privilegi acquisiti per compiere azioni dannose, come il furto di dati o danneggiamento del sistema.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
