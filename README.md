@@ -2462,6 +2462,7 @@ ___________________________________________________________________
 
 _________________________
 
+# ESEMPIO PRINCIPIO DELLA PILA ISO OSI
 
 
 La pila ISO/OSI (Open Systems Interconnection) è un modello concettuale standardizzato che suddivide le funzioni di rete in sette livelli distinti. 
