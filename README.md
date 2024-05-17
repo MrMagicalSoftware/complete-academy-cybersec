@@ -2460,6 +2460,87 @@ ___________________________________________________________________
 
 
 
+_________________________
+
+
+
+La pila ISO/OSI (Open Systems Interconnection) è un modello concettuale standardizzato che suddivide le funzioni di rete in sette livelli distinti. 
+Questo modello facilita la comunicazione tra diversi sistemi di rete e permette a dispositivi e protocolli diversi di interagire tra loro. 
+Ogni livello svolge un compito specifico e comunica con i livelli adiacenti. 
+
+### I Sette Livelli del Modello OSI
+
+1. **Livello Fisico (Physical Layer)**
+2. **Livello Collegamento Dati (Data Link Layer)**
+3. **Livello Rete (Network Layer)**
+4. **Livello Trasporto (Transport Layer)**
+5. **Livello Sessione (Session Layer)**
+6. **Livello Presentazione (Presentation Layer)**
+7. **Livello Applicazione (Application Layer)**
+
+### Esempio Completo: Invio di un File da un Computer a un Altro
+
+#### Livello 7: Applicazione
+
+Un utente vuole inviare un file da un computer A a un computer B utilizzando un'applicazione di posta elettronica. Il livello applicazione è responsabile di fornire servizi di rete direttamente alle applicazioni dell'utente. In questo caso, l'applicazione di posta elettronica usa il protocollo SMTP (Simple Mail Transfer Protocol) per inviare il file come allegato.
+
+#### Livello 6: Presentazione
+
+Il livello di presentazione traduce i dati in un formato comprensibile per il livello successivo. Se il file allegato è compresso o criptato, questo livello si occupa di comprimere o criptare i dati su computer A e decomprimere o decriptare i dati su computer B.
+
+#### Livello 5: Sessione
+
+Il livello di sessione gestisce e controlla il dialogo tra i due computer, stabilendo, gestendo e terminando le connessioni. Assicura che la sessione di comunicazione venga stabilita prima che inizi il trasferimento del file e che sia terminata una volta completato il trasferimento. Ad esempio, si utilizza il protocollo di controllo delle sessioni per stabilire una connessione SMTP tra il client di posta di computer A e il server di posta.
+
+#### Livello 4: Trasporto
+
+Il livello di trasporto garantisce la consegna dei dati da un endpoint all'altro senza errori e in ordine. Utilizza il protocollo TCP (Transmission Control Protocol) per segmentare il file in pacchetti, numerarli e assicurare che siano ricevuti correttamente e nell'ordine giusto dal computer B. TCP gestisce anche il controllo del flusso e il rilevamento degli errori.
+
+#### Livello 3: Rete
+
+Il livello di rete instrada i pacchetti attraverso la rete dall'origine alla destinazione. Utilizza il protocollo IP (Internet Protocol) per determinare il percorso che i pacchetti devono seguire per raggiungere il computer B. Ogni pacchetto contiene l'indirizzo IP del mittente e del destinatario.
+
+#### Livello 2: Collegamento Dati
+
+Il livello di collegamento dati garantisce la trasmissione dei dati tra due nodi direttamente collegati. Questo livello utilizza il protocollo Ethernet per formattare i pacchetti IP in frame, aggiungendo indirizzi MAC (Media Access Control) per identificare i dispositivi fisici sulla rete locale. Gestisce anche la rilevazione e la correzione degli errori di trasmissione.
+
+#### Livello 1: Fisico
+
+Il livello fisico riguarda la trasmissione effettiva dei bit attraverso il mezzo fisico (cavi, fibra ottica, onde radio, ecc.). Si occupa delle specifiche elettriche, meccaniche, funzionali e procedurali per attivare, mantenere e disattivare i collegamenti fisici tra i dispositivi di rete.
+
+### Processo di Comunicazione
+
+1. **Preparazione del File**:
+   - Il file viene preparato dall'applicazione di posta elettronica (Livello 7).
+   - Se necessario, viene compresso o criptato (Livello 6).
+
+2. **Stabilimento della Connessione**:
+   - Una sessione SMTP viene stabilita tra il client e il server di posta (Livello 5).
+
+3. **Segmentazione e Affidabilità**:
+   - Il file viene suddiviso in pacchetti TCP, numerati e preparati per la trasmissione affidabile (Livello 4).
+
+4. **Instradamento dei Pacchetti**:
+   - I pacchetti TCP vengono incapsulati in pacchetti IP e instradati attraverso la rete (Livello 3).
+
+5. **Trasmissione dei Frame**:
+   - I pacchetti IP vengono incapsulati in frame Ethernet e trasmessi attraverso la rete locale (Livello 2).
+
+6. **Trasmissione Fisica**:
+   - I bit vengono trasmessi attraverso il mezzo fisico (cavi, onde radio, ecc.) (Livello 1).
+
+### Ricezione sul Computer B
+
+Il computer B segue il processo inverso:
+
+1. **Livello Fisico**: Riceve i segnali fisici e li converte in bit.
+2. **Livello Collegamento Dati**: Verifica e decapsula i frame Ethernet, estraendo i pacchetti IP.
+3. **Livello Rete**: Decapsula i pacchetti IP, estraendo i segmenti TCP.
+4. **Livello Trasporto**: Riassembla i segmenti TCP nell'ordine corretto, verificando l'integrità dei dati.
+5. **Livello Sessione**: Gestisce la sessione di comunicazione, confermando la ricezione.
+6. **Livello Presentazione**: Decomprime o decripta il file, se necessario.
+7. **Livello Applicazione**: Il client di posta elettronica riceve il file allegato e lo rende disponibile all'utente.
+
 
 
 
