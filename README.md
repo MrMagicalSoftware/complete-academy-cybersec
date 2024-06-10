@@ -2543,8 +2543,27 @@ Il computer B segue il processo inverso:
 7. **Livello Applicazione**: Il client di posta elettronica riceve il file allegato e lo rende disponibile all'utente.
 
 
+________________________________________________________________
 
 
+
+# Payload
+
+
+I payloads "staged" e "stageless" si riferiscono a due metodi diversi di esecuzione di un payload malevolo su un sistema di destinazione.
+
+1. Staged Payloads:
+- Una staged payload è divisa in due parti: il primo stadio (stage) e il secondo stadio (stage two).
+- Il primo stadio è un payload leggero che viene eseguito sul sistema di destinazione per stabilire una connessione crittografata con il server di controllo dell'attaccante.
+- Una volta stabilita la connessione, il secondo stadio viene scaricato e eseguito per eseguire l'attività dannosa desiderata.
+- Le staged payloads sono più versatili e flessibili, consentendo agli attaccanti di eseguire più azioni sul sistema di destinazione.
+
+2. Stageless Payloads:
+- Una stageless payload viene eseguita direttamente sul sistema di destinazione senza la necessità di due stadi distinti.
+- Questo tipo di payload è generalmente più semplice e leggero rispetto a una staged payload, ma può essere più facilmente rilevato dagli strumenti di sicurezza.
+- Le stageless payloads sono più limitate in termini di funzionalità rispetto alle staged payloads, poiché non c'è una fase di negoziazione della connessione con il server di controllo dell'attaccante.
+
+In generale, le staged payloads sono spesso preferite dagli aggressori per la loro maggior flessibilità e capacità di bypassare le misure di sicurezza, mentre le stageless payloads possono essere utilizzate per attacchi più semplici e rapidi.
 
 
 
