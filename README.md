@@ -1,6 +1,11 @@
 # complete-academy-cybersec
 
 
+## architettura di von neumann
+
+![VonNeumann](https://github.com/user-attachments/assets/57720f3d-85e9-4036-b8a8-e27fb8fb999a)
+
+
 # Apripre più terminali :
 
 CRTL + SHIFT + R  
