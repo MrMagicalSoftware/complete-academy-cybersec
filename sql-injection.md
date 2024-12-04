@@ -21,11 +21,11 @@ SELECT * FROM utenti WHERE username = 'admin' --' AND password = 'input_password
 ```
 In questo caso, il -- commenta il resto della query, quindi l'attaccante riesce ad accedere come utente "admin" senza conoscere la password.
 
-Conseguenze: Gli attacchi di SQL injection possono portare a vari problemi, tra cui:
-Accesso non autorizzato ai dati sensibili.
-Modifica o cancellazione di dati nel database.
-Esecuzione di comandi di sistema sul server.
-Esfiltrazione di dati riservati.
+Conseguenze: Gli attacchi di SQL injection possono portare a vari problemi, tra cui:<br>
+Accesso non autorizzato ai dati sensibili.<br>
+Modifica o cancellazione di dati nel database.<br>
+Esecuzione di comandi di sistema sul server.<br>
+Esfiltrazione di dati riservati.<br>
 
 Prevenzione: Per proteggere le applicazioni da attacchi di SQL injection, è importante:
 Utilizzare query parametrizzate o prepared statements, che separano i dati dal codice SQL.
