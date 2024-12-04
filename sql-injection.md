@@ -72,6 +72,15 @@ Try typing an apostrophe ( ' ) after the id=1 and press enter. And you'll see th
 
 
 
+https://website.thm/article?id=1 UNION SELECT 1
+
+La parte UNION SELECT 1 è ciò che rende questa query un tentativo di SQL injection.
+
+UNION: L'operatore UNION combina i risultati di due o più query SELECT. Per funzionare correttamente, le query devono avere lo stesso numero di colonne e tipi di dati compatibili.
+SELECT 1: Questa parte della query seleziona semplicemente il valore 1. Non specifica alcuna tabella, quindi non sta cercando di estrarre dati da una tabella esistente.
+
+
+
 
 
 
