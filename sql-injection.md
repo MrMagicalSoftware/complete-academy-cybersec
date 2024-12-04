@@ -71,9 +71,9 @@ The key to discovering error-based SQL Injection is to break the code's SQL quer
 Try typing an apostrophe ( ' ) after the id=1 and press enter. And you'll see this returns an SQL error informing you of an error in your syntax. The fact that you've received this error message confirms the existence of an SQL Injection vulnerability. We can now exploit this vulnerability and use the error messages to learn more about the database structure.
 
 
-
-https://website.thm/article?id=1 UNION SELECT 1
-
+```
+https://website-example.com/article?id=1 UNION SELECT 1
+```
 La parte UNION SELECT 1 è ciò che rende questa query un tentativo di SQL injection.<br><br>
 
 UNION: L'operatore UNION combina i risultati di due o più query SELECT. Per funzionare correttamente, le query devono avere lo stesso numero di colonne e tipi di dati compatibili.<br>
