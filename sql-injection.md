@@ -9,27 +9,29 @@ Vulnerabilità: L'SQL injection si verifica quando un'applicazione web non valid
 
 Esempio di attacco: Supponiamo che un'applicazione utilizzi una query SQL simile a questa per autenticare un utente:
 
-sql
 
+```
 SELECT * FROM utenti WHERE username = 'input_utente' AND password = 'input_password';
+```
 
 Se un attaccante inserisce come nome utente admin' --, la query diventa:
 
-sql
+```
+SELECT * FROM utenti WHERE username = 'admin' --' AND password = 'input_password';
+```
+In questo caso, il -- commenta il resto della query, quindi l'attaccante riesce ad accedere come utente "admin" senza conoscere la password.
 
-    SELECT * FROM utenti WHERE username = 'admin' --' AND password = 'input_password';
+Conseguenze: Gli attacchi di SQL injection possono portare a vari problemi, tra cui:
+Accesso non autorizzato ai dati sensibili.
+Modifica o cancellazione di dati nel database.
+Esecuzione di comandi di sistema sul server.
+Esfiltrazione di dati riservati.
 
-    In questo caso, il -- commenta il resto della query, quindi l'attaccante riesce ad accedere come utente "admin" senza conoscere la password.
+Prevenzione: Per proteggere le applicazioni da attacchi di SQL injection, è importante:
+Utilizzare query parametrizzate o prepared statements, che separano i dati dal codice SQL.
+Validare e sanificare sempre l'input dell'utente.
+Implementare controlli di accesso adeguati e monitorare le attività sospette.
 
-    Conseguenze: Gli attacchi di SQL injection possono portare a vari problemi, tra cui:
-        Accesso non autorizzato ai dati sensibili.
-        Modifica o cancellazione di dati nel database.
-        Esecuzione di comandi di sistema sul server.
-        Esfiltrazione di dati riservati.
 
-    Prevenzione: Per proteggere le applicazioni da attacchi di SQL injection, è importante:
-        Utilizzare query parametrizzate o prepared statements, che separano i dati dal codice SQL.
-        Validare e sanificare sempre l'input dell'utente.
-        Implementare controlli di accesso adeguati e monitorare le attività sospette.
 
-In sintesi, l'SQL injection è una vulnerabilità grave che può avere conseguenze devastanti per la sicurezza dei dati, ma può essere prevenuta con pratiche di codifica sicure.
+
