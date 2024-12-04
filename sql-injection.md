@@ -1,11 +1,13 @@
 # Sql Injection
 
 
-L'SQL injection è una tecnica di attacco informatico che sfrutta le vulnerabilità nelle applicazioni web che interagiscono con un database. Questo tipo di attacco consente a un malintenzionato di inserire o "iniettare" codice SQL malevolo in una query SQL, con l'obiettivo di manipolare il database in modi non autorizzati. Ecco come funziona in generale:
+L'SQL injection è una tecnica di attacco informatico che sfrutta le vulnerabilità nelle applicazioni web che interagiscono con un database. Questo tipo di attacco consente a un malintenzionato di inserire o "iniettare" codice SQL malevolo in una query SQL, con l'obiettivo di manipolare il database in modi non autorizzati.
 
-    Vulnerabilità: L'SQL injection si verifica quando un'applicazione web non valida correttamente i dati forniti dall'utente. Ad esempio, se un'applicazione accetta input da un modulo di login senza filtrare o sanificare i dati, un attaccante può inserire codice SQL.
+Vulnerabilità: L'SQL injection si verifica quando un'applicazione web non valida correttamente i dati forniti dall'utente. Ad esempio, se un'applicazione accetta input da un modulo di login senza filtrare o sanificare i dati, un attaccante può inserire codice SQL.
 
-    Esempio di attacco: Supponiamo che un'applicazione utilizzi una query SQL simile a questa per autenticare un utente:
+
+
+Esempio di attacco: Supponiamo che un'applicazione utilizzi una query SQL simile a questa per autenticare un utente:
 
 sql
 
