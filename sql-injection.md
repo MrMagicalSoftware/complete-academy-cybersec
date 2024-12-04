@@ -62,6 +62,9 @@ Per proteggere le applicazioni da attacchi di In-Band SQL Injection, è fondamen
 - **Implementare Controlli di Accesso**: Assicurarsi che solo gli utenti autorizzati possano accedere a determinate informazioni o funzionalità.
 
 
+## Pratical 
+
+
 The key to discovering error-based SQL Injection is to break the code's SQL query by trying certain characters until an error message is produced; these are most commonly single apostrophes ( ' ) or a quotation mark ( " ).
 
 
@@ -69,7 +72,6 @@ Try typing an apostrophe ( ' ) after the id=1 and press enter. And you'll see th
 
 
 
-<span style="color: red;">This text is red.</span>
 
 
 
