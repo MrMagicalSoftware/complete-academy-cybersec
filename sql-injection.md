@@ -33,5 +33,42 @@ Validare e sanificare sempre l'input dell'utente.
 Implementare controlli di accesso adeguati e monitorare le attività sospette.
 
 
+________________________________
+
+
+## In band Sql Injection
+
+
+L'In-Band SQL Injection è una delle forme più comuni di attacco SQL injection, in cui l'attaccante riesce a ottenere informazioni dal database attraverso il canale di comunicazione già utilizzato per inviare le richieste. In altre parole, l'attaccante sfrutta la stessa connessione per inviare comandi SQL malevoli e ricevere i risultati.
+
+
+Ci sono due sottotipi principali di In-Band SQL Injection:
+
+1. **Error-Based SQL Injection**: In questo caso, l'attaccante provoca un errore nel database che rivela informazioni utili. Ad esempio, se l'attaccante inserisce un input progettato per generare un errore, il messaggio di errore restituito dal database può contenere dettagli sulla struttura del database, come nomi di tabelle o colonne. Questo tipo di attacco è utile per raccogliere informazioni sul database.
+
+   **Esempio**: Se l'attaccante inserisce un input come `1' AND 1=CONVERT(int, (SELECT @@version)) --`, il database potrebbe restituire un errore che rivela la versione del database in uso.
+
+2. **Union-Based SQL Injection**: Questo tipo di attacco sfrutta l'operatore `UNION` per combinare i risultati di più query. L'attaccante può utilizzare questa tecnica per estrarre dati da altre tabelle nel database. Per farlo, l'attaccante deve conoscere il numero di colonne nella query originale e il tipo di dati che ciascuna colonna restituisce.
+
+   **Esempio**: Se l'applicazione originale esegue una query come `SELECT nome, email FROM utenti WHERE id = 1`, l'attaccante potrebbe iniettare un input come `1 UNION SELECT username, password FROM admin --`. Questo restituirebbe i nomi utente e le password dalla tabella "admin".
+
+### Prevenzione dell'In-Band SQL Injection
+
+Per proteggere le applicazioni da attacchi di In-Band SQL Injection, è fondamentale adottare le seguenti misure:
+
+- **Utilizzare Prepared Statements**: Le query parametrizzate separano i dati dal codice SQL, riducendo il rischio di iniezione.
+- **Sanificare l'Input**: Validare e filtrare sempre i dati forniti dagli utenti per rimuovere caratteri pericolosi.
+- **Limitare i Messaggi di Errore**: Non rivelare informazioni dettagliate sugli errori del database agli utenti finali, poiché possono fornire indizi utili agli attaccanti.
+- **Implementare Controlli di Accesso**: Assicurarsi che solo gli utenti autorizzati possano accedere a determinate informazioni o funzionalità.
+
+
+
+
+
+
+
+
+
+
 
 
