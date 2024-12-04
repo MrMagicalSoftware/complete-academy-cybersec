@@ -102,5 +102,79 @@ The query results provide three columns for the staff_users table: id, password,
 https://website.thm/article?id=0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM staff_users
 ```
 
+____________________________________
+
+
+
+
+
+
+Il **Blind SQL Injection** (Blind SQLi) è una forma di attacco SQL injection in cui l'attaccante non può vedere direttamente i risultati delle query SQL iniettate, ma può comunque dedurre informazioni sul database attraverso il comportamento dell'applicazione. Questo tipo di attacco è spesso utilizzato per bypassare meccanismi di autenticazione e ottenere accesso non autorizzato.
+
+### Come Funziona il Blind SQL Injection
+
+In un attacco di Blind SQLi, l'attaccante invia input malevoli a un'applicazione web e osserva le risposte dell'applicazione per dedurre informazioni. Poiché non ci sono messaggi di errore o risultati visibili, l'attaccante deve basarsi su indizi indiretti.
+
+#### Tipi di Blind SQL Injection
+
+1. **Boolean-Based Blind SQL Injection**: In questo caso, l'attaccante modifica la query in modo che restituisca un risultato vero o falso. Ad esempio, se l'attaccante inserisce un input come `1' AND (SELECT SUBSTRING(username, 1, 1) FROM users WHERE id = 1) = 'a' --`, l'applicazione restituirà una risposta diversa a seconda che la condizione sia vera o falsa. L'attaccante può quindi utilizzare questa tecnica per indovinare i valori nel database, carattere per carattere.
+
+2. **Time-Based Blind SQL Injection**: In questo caso, l'attaccante sfrutta il tempo di risposta dell'applicazione. Ad esempio, l'attaccante può iniettare una query che causa un ritardo nella risposta, come `1' OR IF((SELECT SUBSTRING(username, 1, 1) FROM users WHERE id = 1) = 'a', SLEEP(5), 0) --`. Se l'applicazione impiega più tempo a rispondere, l'attaccante sa che la condizione è vera.
+
+### Esempio di Bypass dell'Autenticazione
+
+Supponiamo che un'applicazione web utilizzi una query SQL per autenticare un utente:
+
+```sql
+SELECT * FROM users WHERE username = 'input_username' AND password = 'input_password';
+```
+
+Un attaccante potrebbe tentare di bypassare l'autenticazione utilizzando una tecnica di Blind SQLi. Ecco un esempio di come potrebbe procedere:
+
+1. **Input Malevolo**: L'attaccante inserisce un nome utente come `admin' OR '1'='1` e una password qualsiasi. La query diventa:
+   ```sql
+   SELECT * FROM users WHERE username = 'admin' OR '1'='1' AND password = 'any_password';
+   ```
+   Poiché `1=1` è sempre vero, l'attaccante potrebbe ottenere accesso come utente "admin".
+
+2. **Utilizzo di Blind SQLi**: Se l'applicazione non restituisce errori o messaggi chiari, l'attaccante potrebbe utilizzare tecniche di Blind SQLi per verificare se l'utente "admin" esiste nel database. Potrebbe inviare richieste come:
+   ```sql
+   ' OR (SELECT COUNT(*) FROM users WHERE username = 'admin') > 0 --
+   ```
+   Se l'applicazione restituisce una risposta positiva, l'attaccante sa che l'utente "admin" esiste.
+
+### Prevenzione del Blind SQL Injection
+
+Per proteggere le applicazioni da attacchi di Blind SQL Injection e bypass dell'autenticazione, è fondamentale:
+
+- **Utilizzare Prepared Statements**: Le query parametrizzate impediscono l'iniezione di codice SQL.
+- **Sanificare l'Input**: Validare e filtrare sempre i dati forniti dagli utenti.
+- **Limitare i Messaggi di Errore**: Non rivelare informazioni dettagliate sugli errori del database.
+- **Implementare Controlli di Accesso**: Assicurarsi che solo gli utenti autorizzati possano accedere a determinate informazioni o funzionalità.
+
+
+
+Nota :
+Suppongo di avere questa query di partenza :
+select * from users where username='%username%' and password='%password%' LIMIT 1;
+
+Se ho una form da completare User name e password  , nella password posso fare inject di ' OR 1=1;--
+
+la query sarà quindi :
+select * from users where username='' and password='' OR 1=1;
+
+la parte ;-- mi commenta LIMIT 1 ;
+
+Because 1=1 is a true statement and we've used an OR operator, this will always cause the query to return as true, which satisfies the web applications logic that the database found a valid username/password combination and that access should be allowed.
+
+
+
+
+
+
+
+
+
+
 
 
